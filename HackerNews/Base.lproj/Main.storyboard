@@ -43,9 +43,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Hacker News" id="gqJ-yZ-P04">
-                        <barButtonItem key="leftBarButtonItem" image="MenuIcon" id="awh-aX-3s6">
+                        <barButtonItem key="leftBarButtonItem" image="SettingsIcon" id="2cR-Ac-Jr8">
                             <connections>
-                                <segue destination="9B1-07-mjN" kind="push" identifier="ShowSettings" id="vBQ-fs-toK"/>
+                                <segue destination="9B1-07-mjN" kind="push" identifier="ShowSettings" id="A8M-gp-6ou"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -126,7 +126,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="MenuIcon" width="25" height="25"/>
+        <image name="SettingsIcon" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

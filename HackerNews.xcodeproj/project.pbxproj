@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D70A911A193E87FD008D59C3 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A9119193E87FD008D59C3 /* BrowserViewController.swift */; };
+		D7229DF8193EB2C2008F661B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D74A035F193DA4F500F01247 /* Images.xcassets */; };
+		D7229DFA193EB445008F661B /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7229DF9193EB445008F661B /* BrowserViewController.swift */; };
 		D74A0359193DA4F500F01247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A0358193DA4F500F01247 /* AppDelegate.swift */; };
 		D74A035E193DA4F500F01247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D74A035C193DA4F500F01247 /* Main.storyboard */; };
-		D74A0360193DA4F500F01247 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D74A035F193DA4F500F01247 /* Images.xcassets */; };
 		D74A036C193DA4F600F01247 /* HackerNewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A036B193DA4F600F01247 /* HackerNewsTests.swift */; };
 		D74A0376193DA50800F01247 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A0375193DA50800F01247 /* MainTableViewController.swift */; };
 		D7ED3AD6193EA0CE002F07F3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ED3AD5193EA0CE002F07F3 /* SettingsViewController.swift */; };
@@ -27,7 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D70A9119193E87FD008D59C3 /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowserViewController.swift; path = ../BrowserViewController.swift; sourceTree = "<group>"; };
+		D7229DF9193EB445008F661B /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		D74A0353193DA4F500F01247 /* HackerNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74A0357193DA4F500F01247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D74A0358193DA4F500F01247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 				D74A0358193DA4F500F01247 /* AppDelegate.swift */,
 				D74A0375193DA50800F01247 /* MainTableViewController.swift */,
 				D7ED3AD5193EA0CE002F07F3 /* SettingsViewController.swift */,
-				D70A9119193E87FD008D59C3 /* BrowserViewController.swift */,
+				D7229DF9193EB445008F661B /* BrowserViewController.swift */,
 				D74A035C193DA4F500F01247 /* Main.storyboard */,
 				D74A035F193DA4F500F01247 /* Images.xcassets */,
 				D74A0356193DA4F500F01247 /* Supporting Files */,
@@ -196,7 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D74A035E193DA4F500F01247 /* Main.storyboard in Resources */,
-				D74A0360193DA4F500F01247 /* Images.xcassets in Resources */,
+				D7229DF8193EB2C2008F661B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D74A0376193DA50800F01247 /* MainTableViewController.swift in Sources */,
-				D70A911A193E87FD008D59C3 /* BrowserViewController.swift in Sources */,
+				D7229DFA193EB445008F661B /* BrowserViewController.swift in Sources */,
 				D74A0359193DA4F500F01247 /* AppDelegate.swift in Sources */,
 				D7ED3AD6193EA0CE002F07F3 /* SettingsViewController.swift in Sources */,
 			);
@@ -285,7 +285,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -321,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -338,6 +338,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -351,6 +352,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
