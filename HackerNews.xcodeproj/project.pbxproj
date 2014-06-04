@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D72072CE193EDFD100BD5972 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D72072CC193EDFD100BD5972 /* menu.png */; };
+		D72072CF193EDFD100BD5972 /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D72072CD193EDFD100BD5972 /* menu@2x.png */; };
 		D7229DF8193EB2C2008F661B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D74A035F193DA4F500F01247 /* Images.xcassets */; };
 		D7229DFA193EB445008F661B /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7229DF9193EB445008F661B /* BrowserViewController.swift */; };
 		D74A0359193DA4F500F01247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A0358193DA4F500F01247 /* AppDelegate.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D72072CC193EDFD100BD5972 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		D72072CD193EDFD100BD5972 /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
 		D7229DF9193EB445008F661B /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		D74A0353193DA4F500F01247 /* HackerNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74A0357193DA4F500F01247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 		D74A0355193DA4F500F01247 /* HackerNews */ = {
 			isa = PBXGroup;
 			children = (
+				D72072CC193EDFD100BD5972 /* menu.png */,
+				D72072CD193EDFD100BD5972 /* menu@2x.png */,
 				D74A0358193DA4F500F01247 /* AppDelegate.swift */,
 				D74A0375193DA50800F01247 /* MainTableViewController.swift */,
 				D7ED3AD5193EA0CE002F07F3 /* SettingsViewController.swift */,
@@ -196,7 +202,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D74A035E193DA4F500F01247 /* Main.storyboard in Resources */,
+				D72072CF193EDFD100BD5972 /* menu@2x.png in Resources */,
 				D7229DF8193EB2C2008F661B /* Images.xcassets in Resources */,
+				D72072CE193EDFD100BD5972 /* menu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +342,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMPRESS_PNG_FILES = YES;
 				INFOPLIST_FILE = HackerNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -348,6 +357,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMPRESS_PNG_FILES = YES;
 				INFOPLIST_FILE = HackerNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

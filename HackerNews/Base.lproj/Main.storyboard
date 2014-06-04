@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ir3-Np-q9z">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
@@ -43,9 +44,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Hacker News" id="gqJ-yZ-P04">
-                        <barButtonItem key="leftBarButtonItem" image="SettingsIcon" id="2cR-Ac-Jr8">
+                        <barButtonItem key="leftBarButtonItem" image="menu.png" id="tfZ-3j-Lg0">
                             <connections>
-                                <segue destination="9B1-07-mjN" kind="push" identifier="ShowSettings" id="A8M-gp-6ou"/>
+                                <segue destination="9B1-07-mjN" kind="push" identifier="ShowSettings" id="CJy-av-qSD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -96,7 +97,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="e1w-Uh-uJs">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="RhP-bG-I0G"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="wfr-QA-Hvs"/>
                     </navigationItem>
                     <connections>
                         <outlet property="webView" destination="Df4-Lb-5FS" id="5kT-tc-IBh"/>
@@ -126,7 +127,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SettingsIcon" width="25" height="25"/>
+        <image name="menu.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
