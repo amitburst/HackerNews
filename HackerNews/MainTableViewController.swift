@@ -11,9 +11,9 @@ import UIKit
 
 class MainTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let storyCellIdentifier = "StoryCell"
     let hackerNewsApiUrl = "http://hn.amitburst.me/news"
-    
+    let storyCellIdentifier = "StoryCell"
+    let showWebViewIdentifier = "ShowBrowser"
     var stories = []
     
     override func viewDidLoad() {
@@ -57,5 +57,15 @@ class MainTableViewController: UITableViewController, UITableViewDataSource, UIT
         return cell
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        if segue.identifier == self.showWebViewIdentifier {
+            let webView = segue.destinationViewController as BrowserViewController
+            let cell = sender as UITableViewCell
+            let row = self.tableView.indexPathForCell(cell).row
+            
+            webView.title = (self.stories[row] as NSDictionary)["title"] as String
+            webView.urlToLoad = (self.stories[row] as NSDictionary)["url"] as String
+        }
+    }
     
 }

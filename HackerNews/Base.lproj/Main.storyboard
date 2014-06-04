@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ir3-Np-q9z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ir3-Np-q9z">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
@@ -9,12 +9,11 @@
             <objects>
                 <tableViewController id="zHz-QP-MRw" customClass="MainTableViewController" customModule="HackerNews" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZCF-9f-vEa">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StoryCell" textLabel="04k-vR-QA1" detailTextLabel="GZS-aX-QuC" style="IBUITableViewCellStyleSubtitle" id="r01-Al-gmZ">
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="StoryCell" textLabel="04k-vR-QA1" detailTextLabel="GZS-aX-QuC" style="IBUITableViewCellStyleSubtitle" id="r01-Al-gmZ">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r01-Al-gmZ" id="PW4-9s-UP1">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -33,6 +32,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="67O-cH-oqK" kind="push" identifier="ShowBrowser" id="AQi-mf-oLM"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -41,12 +43,68 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Hacker News" id="gqJ-yZ-P04">
-                        <barButtonItem key="leftBarButtonItem" image="MenuIcon" id="awh-aX-3s6"/>
+                        <barButtonItem key="leftBarButtonItem" image="MenuIcon" id="awh-aX-3s6">
+                            <connections>
+                                <segue destination="9B1-07-mjN" kind="push" identifier="ShowSettings" id="vBQ-fs-toK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sl8-5G-c7z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1127" y="361"/>
+            <point key="canvasLocation" x="751.33333333333326" y="427.18333333333334"/>
+        </scene>
+        <!--View Controller - Settings-->
+        <scene sceneID="gtH-Jz-9U0">
+            <objects>
+                <viewController id="9B1-07-mjN" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aCu-0b-efl"/>
+                        <viewControllerLayoutGuide type="bottom" id="hdu-Ia-Tfl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q6U-JQ-1Dn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="p1y-xi-mQV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b0d-Uv-5oA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1212" y="-255"/>
+        </scene>
+        <!--Browser View Controller-->
+        <scene sceneID="DDC-rn-2uW">
+            <objects>
+                <viewController id="67O-cH-oqK" customClass="BrowserViewController" customModule="HackerNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DLe-Is-J7Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="p18-EF-gsv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nx8-F5-Mib">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Df4-Lb-5FS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="67O-cH-oqK" id="ReW-2b-e8Q"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="e1w-Uh-uJs">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="RhP-bG-I0G"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="Df4-Lb-5FS" id="5kT-tc-IBh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cRu-Ae-eIG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1212" y="427"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WWx-hd-jOD">
@@ -64,10 +122,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Dr-Bs-yyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="435" y="361"/>
+            <point key="canvasLocation" x="290" y="427.18333333333334"/>
         </scene>
     </scenes>
     <resources>
         <image name="MenuIcon" width="25" height="25"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

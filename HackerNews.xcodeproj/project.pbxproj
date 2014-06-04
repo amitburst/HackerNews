@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D70A911A193E87FD008D59C3 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A9119193E87FD008D59C3 /* BrowserViewController.swift */; };
 		D74A0359193DA4F500F01247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A0358193DA4F500F01247 /* AppDelegate.swift */; };
 		D74A035E193DA4F500F01247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D74A035C193DA4F500F01247 /* Main.storyboard */; };
 		D74A0360193DA4F500F01247 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D74A035F193DA4F500F01247 /* Images.xcassets */; };
 		D74A036C193DA4F600F01247 /* HackerNewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A036B193DA4F600F01247 /* HackerNewsTests.swift */; };
 		D74A0376193DA50800F01247 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A0375193DA50800F01247 /* MainTableViewController.swift */; };
+		D7ED3AD6193EA0CE002F07F3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ED3AD5193EA0CE002F07F3 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D70A9119193E87FD008D59C3 /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowserViewController.swift; path = ../BrowserViewController.swift; sourceTree = "<group>"; };
 		D74A0353193DA4F500F01247 /* HackerNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74A0357193DA4F500F01247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D74A0358193DA4F500F01247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 		D74A036A193DA4F600F01247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D74A036B193DA4F600F01247 /* HackerNewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerNewsTests.swift; sourceTree = "<group>"; };
 		D74A0375193DA50800F01247 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		D7ED3AD5193EA0CE002F07F3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +79,10 @@
 		D74A0355193DA4F500F01247 /* HackerNews */ = {
 			isa = PBXGroup;
 			children = (
-				D74A0375193DA50800F01247 /* MainTableViewController.swift */,
 				D74A0358193DA4F500F01247 /* AppDelegate.swift */,
+				D74A0375193DA50800F01247 /* MainTableViewController.swift */,
+				D7ED3AD5193EA0CE002F07F3 /* SettingsViewController.swift */,
+				D70A9119193E87FD008D59C3 /* BrowserViewController.swift */,
 				D74A035C193DA4F500F01247 /* Main.storyboard */,
 				D74A035F193DA4F500F01247 /* Images.xcassets */,
 				D74A0356193DA4F500F01247 /* Supporting Files */,
@@ -209,7 +215,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D74A0376193DA50800F01247 /* MainTableViewController.swift in Sources */,
+				D70A911A193E87FD008D59C3 /* BrowserViewController.swift in Sources */,
 				D74A0359193DA4F500F01247 /* AppDelegate.swift in Sources */,
+				D7ED3AD6193EA0CE002F07F3 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +333,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = HackerNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -336,7 +346,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = HackerNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
