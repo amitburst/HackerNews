@@ -25,6 +25,12 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "fetchStories", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
+        self.refreshControl = refreshControl
+        
         fetchStories()
     }
     
@@ -38,11 +44,13 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
         NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler: { response, data, error in
             if error {
                 println(error)
+                self.refreshControl.endRefreshing()
             } else {
                 let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
                 self.stories = json["posts"] as NSArray
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
                 })
             }
         })
