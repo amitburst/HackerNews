@@ -2,14 +2,19 @@
 //  SettingsViewController.swift
 //  HackerNews
 //
-//  Created by Amit Burstein on 6/3/14.
 //  Copyright (c) 2014 Amit Burstein. All rights reserved.
+//  See LICENSE for licensing information.
+//
+//  Abstract:
+//      Handles displaying and controlling settings for the app.
 //
 
 import Foundation
 import UIKit
 
 class SettingsViewController : UIViewController {
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

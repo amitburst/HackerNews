@@ -2,8 +2,11 @@
 //  BrowserViewController.swift
 //  HackerNews
 //
-//  Created by Amit Burstein on 6/3/14.
 //  Copyright (c) 2014 Amit Burstein. All rights reserved.
+//  See LICENSE for licensing information.
+//
+//  Abstract:
+//      Handles loading URLs for stories.
 //
 
 import Foundation
@@ -15,6 +18,9 @@ class BrowserViewController : UIViewController {
     
     @IBOutlet var webView : UIWebView
     var urlToLoad = ""
+    var storyTitle = ""
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,5 +30,12 @@ class BrowserViewController : UIViewController {
         self.webView.loadRequest(request)
     }
     
+    // MARK: IBActions
+    
+    @IBAction func showSharingOptions(sender : AnyObject) {
+        let activityViewController = UIActivityViewController(activityItems: [self.storyTitle, self.urlToLoad], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [UIActivityTypeAssignToContact, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
+        self.navigationController.presentViewController(activityViewController, animated: true, completion: nil)
+    }
     
 }
