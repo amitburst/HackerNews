@@ -25,17 +25,17 @@ class BrowserViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = NSURL(string: self.urlToLoad)
+        let url = NSURL(string: urlToLoad)
         let request = NSURLRequest(URL: url)
-        self.webView.loadRequest(request)
+        webView.loadRequest(request)
     }
     
     // MARK: IBActions
     
     @IBAction func showSharingOptions(sender : AnyObject) {
-        let activityViewController = UIActivityViewController(activityItems: [self.storyTitle, self.urlToLoad], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [storyTitle, urlToLoad], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [UIActivityTypeAssignToContact, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
-        self.navigationController.presentViewController(activityViewController, animated: true, completion: nil)
+        navigationController.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
 }

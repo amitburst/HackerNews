@@ -26,12 +26,18 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureRefreshControl()
+        
+        fetchStories()
+    }
+    
+    // MARK: Configuration
+    
+    func configureRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "fetchStories", forControlEvents: UIControlEvents.ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
         self.refreshControl = refreshControl
-        
-        fetchStories()
     }
     
     // MARK: Story Fetching
@@ -59,13 +65,13 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
     // MARK: UITableViewDataSource
     
     override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.stories.count
+        return stories.count
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier(storyCellIdentifier) as UITableViewCell
         
-        let story : NSDictionary = self.stories[indexPath.row] as NSDictionary
+        let story = stories[indexPath.row] as NSDictionary
         let user = story["user"] as NSDictionary
         
         let title = story["title"] as String
@@ -81,11 +87,11 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
     // MARK: UIViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        if segue.identifier == self.showBrowserIdentifier {
+        if segue.identifier == showBrowserIdentifier {
             let webView = segue.destinationViewController as BrowserViewController
             let cell = sender as UITableViewCell
-            let row = self.tableView.indexPathForCell(cell).row
-            let story = self.stories[row] as NSDictionary
+            let row = tableView.indexPathForCell(cell).row
+            let story = stories[row] as NSDictionary
             
             webView.title = story["title"] as String
             webView.storyTitle = webView.title
