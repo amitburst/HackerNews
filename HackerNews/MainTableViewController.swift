@@ -25,9 +25,7 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureRefreshControl()
-        
         fetchStories()
     }
     
@@ -47,16 +45,19 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
         let request = NSURLRequest(URL: url)
         let queue = NSOperationQueue()
         
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
         NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler: { response, data, error in
             if error {
                 println(error)
                 self.refreshControl.endRefreshing()
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             } else {
                 let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
                 self.stories = json["posts"] as NSArray
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
                     self.refreshControl.endRefreshing()
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 })
             }
         })

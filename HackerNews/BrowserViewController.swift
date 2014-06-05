@@ -12,19 +12,25 @@
 import Foundation
 import UIKit
 
-class BrowserViewController : UIViewController {
+class BrowserViewController : UIViewController, UIWebViewDelegate {
     
     // MARK: Properties
     
-    @IBOutlet var webView : UIWebView
+    @IBOutlet var webView: UIWebView
+    @IBOutlet var activityIndicator: UIActivityIndicatorView
     var urlToLoad = ""
     var storyTitle = ""
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
+        loadUrl()
+    }
+    
+    // MARK: Page Loading
+    
+    func loadUrl() {
         let url = NSURL(string: urlToLoad)
         let request = NSURLRequest(URL: url)
         webView.loadRequest(request)
@@ -36,6 +42,18 @@ class BrowserViewController : UIViewController {
         let activityViewController = UIActivityViewController(activityItems: [storyTitle, urlToLoad], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [UIActivityTypeAssignToContact, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
         navigationController.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+    
+    // MARK: UIWebViewDelegate
+    
+    func webViewDidStartLoad(webView: UIWebView) {
+        activityIndicator.startAnimating()
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        activityIndicator.stopAnimating()
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
     
 }
