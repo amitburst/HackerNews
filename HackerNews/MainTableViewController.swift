@@ -49,7 +49,7 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
                 let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
                 self.stories = json["posts"] as NSArray
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadData()
+                    self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
                     self.refreshControl.endRefreshing()
                 })
             }
