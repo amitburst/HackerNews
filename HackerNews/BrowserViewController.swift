@@ -28,6 +28,13 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
         loadUrl()
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        if isMovingFromParentViewController() {
+            webView.stopLoading()
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+    }
+    
     // MARK: Page Loading
     
     func loadUrl() {
