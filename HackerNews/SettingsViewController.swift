@@ -9,7 +9,6 @@
 //      Handles displaying and controlling settings for the app.
 //
 
-import Foundation
 import UIKit
 
 class SettingsViewController : UIViewController {

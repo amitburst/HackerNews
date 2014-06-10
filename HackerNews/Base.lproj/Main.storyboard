@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="StoryCell" textLabel="04k-vR-QA1" detailTextLabel="GZS-aX-QuC" rowHeight="55" style="IBUITableViewCellStyleSubtitle" id="r01-Al-gmZ">
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PostCell" textLabel="04k-vR-QA1" detailTextLabel="GZS-aX-QuC" rowHeight="55" style="IBUITableViewCellStyleSubtitle" id="r01-Al-gmZ">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r01-Al-gmZ" id="PW4-9s-UP1">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -92,9 +92,6 @@
                                     <outlet property="delegate" destination="67O-cH-oqK" id="ReW-2b-e8Q"/>
                                 </connections>
                             </webView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="S1j-uP-OSH">
-                                <rect key="frame" x="150" y="274" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -112,7 +109,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="S1j-uP-OSH" id="zhQ-Fz-yfd"/>
                         <outlet property="webView" destination="Df4-Lb-5FS" id="5kT-tc-IBh"/>
                     </connections>
                 </viewController>
