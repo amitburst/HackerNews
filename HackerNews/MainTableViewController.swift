@@ -40,7 +40,7 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
         
         HNManager.sharedManager().loadPostsWithFilter(.Top, completion: { posts in
-            if (posts) {
+            if (posts != nil && posts.count > 0) {
                 self.posts = posts as HNPost[]
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
@@ -49,6 +49,8 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
                 })
             } else {
                 println("Could not fetch posts!")
+                self.refreshControl.endRefreshing()
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
             }
         })
     }
