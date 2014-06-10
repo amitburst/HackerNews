@@ -33,7 +33,7 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
         }
     }
     
-    // MARK: Page Loading
+    // MARK: Functions
     
     func loadUrl() {
         let url = NSURL(string: post.UrlString)
