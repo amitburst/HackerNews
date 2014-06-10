@@ -11,7 +11,17 @@
 
 import UIKit
 
-class SettingsViewController : UIViewController {
+class SettingsViewController : UITableViewController {
+    
+    // MARK: Properties
+    
+    @IBOutlet var markStoryReadOnOpenSwitch: UISwitch
+    @IBOutlet var hideReadItemsSwitch: UISwitch
+    @IBOutlet var sharingAirdropSwitch: UISwitch
+    @IBOutlet var sharingEmailSwitch: UISwitch
+    @IBOutlet var sharingMessageSwitch: UISwitch
+    @IBOutlet var sharingFacebookSwitch: UISwitch
+    @IBOutlet var sharingTwitterSwitch: UISwitch
     
     // MARK: Lifecycle
     
