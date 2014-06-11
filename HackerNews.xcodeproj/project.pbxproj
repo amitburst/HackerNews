@@ -8,15 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		7761367F803C4C868DB7867B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F092F1F07D496F95F84F72 /* libPods.a */; };
-		D72072CE193EDFD100BD5972 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D72072CC193EDFD100BD5972 /* menu.png */; };
-		D72072CF193EDFD100BD5972 /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D72072CD193EDFD100BD5972 /* menu@2x.png */; };
 		D7229DF8193EB2C2008F661B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D74A035F193DA4F500F01247 /* Images.xcassets */; };
 		D7229DFA193EB445008F661B /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7229DF9193EB445008F661B /* BrowserViewController.swift */; };
 		D74A0359193DA4F500F01247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A0358193DA4F500F01247 /* AppDelegate.swift */; };
 		D74A035E193DA4F500F01247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D74A035C193DA4F500F01247 /* Main.storyboard */; };
 		D74A036C193DA4F600F01247 /* HackerNewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A036B193DA4F600F01247 /* HackerNewsTests.swift */; };
-		D74A0376193DA50800F01247 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A0375193DA50800F01247 /* MainTableViewController.swift */; };
-		D7ED3AD6193EA0CE002F07F3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ED3AD5193EA0CE002F07F3 /* SettingsViewController.swift */; };
+		D74A0376193DA50800F01247 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A0375193DA50800F01247 /* MainViewController.swift */; };
+		D7E162041948499C00AC4298 /* HairlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E162031948499C00AC4298 /* HairlineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,8 +31,6 @@
 		2EA1E6BA65844C08B520D71E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B8F092F1F07D496F95F84F72 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D71CA51D194698BC006DE243 /* HackerNews-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HackerNews-Bridging-Header.h"; sourceTree = "<group>"; };
-		D72072CC193EDFD100BD5972 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
-		D72072CD193EDFD100BD5972 /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
 		D7229DF9193EB445008F661B /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		D74A0353193DA4F500F01247 /* HackerNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74A0357193DA4F500F01247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,8 +40,8 @@
 		D74A0365193DA4F600F01247 /* HackerNewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerNewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74A036A193DA4F600F01247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D74A036B193DA4F600F01247 /* HackerNewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerNewsTests.swift; sourceTree = "<group>"; };
-		D74A0375193DA50800F01247 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
-		D7ED3AD5193EA0CE002F07F3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D74A0375193DA50800F01247 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D7E162031948499C00AC4298 /* HairlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HairlineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,12 +94,10 @@
 		D74A0355193DA4F500F01247 /* HackerNews */ = {
 			isa = PBXGroup;
 			children = (
-				D72072CC193EDFD100BD5972 /* menu.png */,
-				D72072CD193EDFD100BD5972 /* menu@2x.png */,
 				D74A0358193DA4F500F01247 /* AppDelegate.swift */,
-				D74A0375193DA50800F01247 /* MainTableViewController.swift */,
-				D7ED3AD5193EA0CE002F07F3 /* SettingsViewController.swift */,
+				D74A0375193DA50800F01247 /* MainViewController.swift */,
 				D7229DF9193EB445008F661B /* BrowserViewController.swift */,
+				D7E162031948499C00AC4298 /* HairlineView.swift */,
 				D71CA51D194698BC006DE243 /* HackerNews-Bridging-Header.h */,
 				D74A035C193DA4F500F01247 /* Main.storyboard */,
 				D74A035F193DA4F500F01247 /* Images.xcassets */,
@@ -220,9 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D74A035E193DA4F500F01247 /* Main.storyboard in Resources */,
-				D72072CF193EDFD100BD5972 /* menu@2x.png in Resources */,
 				D7229DF8193EB2C2008F661B /* Images.xcassets in Resources */,
-				D72072CE193EDFD100BD5972 /* menu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,10 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D74A0376193DA50800F01247 /* MainTableViewController.swift in Sources */,
+				D74A0376193DA50800F01247 /* MainViewController.swift in Sources */,
 				D7229DFA193EB445008F661B /* BrowserViewController.swift in Sources */,
 				D74A0359193DA4F500F01247 /* AppDelegate.swift in Sources */,
-				D7ED3AD6193EA0CE002F07F3 /* SettingsViewController.swift in Sources */,
+				D7E162041948499C00AC4298 /* HairlineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

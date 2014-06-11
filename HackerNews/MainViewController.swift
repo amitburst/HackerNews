@@ -1,5 +1,5 @@
 //
-//  MainTableViewController.swift
+//  MainViewController.swift
 //  HackerNews
 //
 //  Copyright (c) 2014 Amit Burstein. All rights reserved.
@@ -10,36 +10,39 @@
 //
 
 import UIKit
+import QuartzCore
 
-class MainTableViewController: UITableViewController, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDataSource {
     
     // MARK: Properties
 
     let postCellIdentifier = "PostCell"
     let showBrowserIdentifier = "ShowBrowser"
+    var postFilter = PostFilterType.Top
     var posts = HNPost[]()
+    var refreshControl = UIRefreshControl()
+    @IBOutlet var tableView: UITableView
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureRefreshControl()
+        configureUI()
         fetchPosts()
     }
     
     // MARK: Functions
     
-    func configureRefreshControl() {
-        let refreshControl = UIRefreshControl()
+    func configureUI() {
         refreshControl.addTarget(self, action: "fetchPosts", forControlEvents: .ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
-        self.refreshControl = refreshControl
+        tableView.insertSubview(refreshControl, atIndex: 0)
     }
     
     func fetchPosts() {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
         
-        HNManager.sharedManager().loadPostsWithFilter(.Top, completion: { posts in
+        HNManager.sharedManager().loadPostsWithFilter(postFilter, completion: { posts in
             if (posts != nil && posts.count > 0) {
                 self.posts = posts as HNPost[]
                 dispatch_async(dispatch_get_main_queue(), {
@@ -62,11 +65,11 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
     
     // MARK: UITableViewDataSource
     
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier(postCellIdentifier) as UITableViewCell
         
         let post = posts[indexPath.row]
@@ -96,4 +99,21 @@ class MainTableViewController: UITableViewController, UITableViewDataSource {
         }
     }
     
+    // MARK: IBActions
+    
+    @IBAction func changePostFilter(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            postFilter = .Top
+            fetchPosts()
+        case 1:
+            postFilter = .New
+            fetchPosts()
+        case 2:
+            postFilter = .Ask
+            fetchPosts()
+        default:
+            println("Bad segment index!")
+        }
+    }
 }
