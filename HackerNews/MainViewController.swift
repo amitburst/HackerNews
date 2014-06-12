@@ -31,6 +31,11 @@ class MainViewController: UIViewController, UITableViewDataSource {
         fetchPosts()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow(), animated: animated)
+        super.viewWillAppear(animated)
+    }
+    
     // MARK: Functions
     
     func configureUI() {
