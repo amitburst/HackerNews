@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ir3-Np-q9z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ir3-Np-q9z">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
@@ -14,11 +14,11 @@
                         <viewControllerLayoutGuide type="bottom" id="p18-EF-gsv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nx8-F5-Mib">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Df4-Lb-5FS">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="67O-cH-oqK" id="ReW-2b-e8Q"/>
@@ -27,10 +27,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Df4-Lb-5FS" secondAttribute="trailing" id="F3B-Bu-NZI"/>
-                            <constraint firstAttribute="bottom" secondItem="Df4-Lb-5FS" secondAttribute="bottom" id="HIa-NJ-7ER"/>
-                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="leading" secondItem="nx8-F5-Mib" secondAttribute="leading" id="L3p-al-F6d"/>
-                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="top" secondItem="nx8-F5-Mib" secondAttribute="top" id="LoR-Rc-0WF"/>
+                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="leading" secondItem="nx8-F5-Mib" secondAttribute="leading" id="Dl1-8y-nkG"/>
+                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="top" secondItem="nx8-F5-Mib" secondAttribute="top" id="Q0u-wK-1kW"/>
+                            <constraint firstAttribute="bottom" secondItem="Df4-Lb-5FS" secondAttribute="bottom" id="hRG-fu-Xk6"/>
+                            <constraint firstAttribute="trailing" secondItem="Df4-Lb-5FS" secondAttribute="trailing" id="pb5-J7-UKu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="e1w-Uh-uJs">
@@ -46,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cRu-Ae-eIG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1818" y="360.84507042253523"/>
+            <point key="canvasLocation" x="1212" y="427"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WWx-hd-jOD">
@@ -64,7 +64,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Dr-Bs-yyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="435" y="361"/>
+            <point key="canvasLocation" x="290" y="427.18333333333334"/>
         </scene>
         <!--Hacker News-->
         <scene sceneID="GHw-OC-hqc">
@@ -75,15 +75,15 @@
                         <viewControllerLayoutGuide type="bottom" id="Eeq-zR-k7D"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xHn-jJ-Twf">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kIS-KG-cZA" customClass="HairlineView" customModule="HackerNews" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="113" width="480" height="1"/>
+                                <rect key="frame" x="0.0" y="113" width="320" height="89"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Qd-dk-FSF">
-                                <rect key="frame" x="10" y="74" width="461" height="29"/>
+                                <rect key="frame" x="10" y="74" width="301" height="29"/>
                                 <segments>
                                     <segment title="Top"/>
                                     <segment title="Newest"/>
@@ -94,11 +94,8 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GSA-Bh-1dA">
-                                <rect key="frame" x="0.0" y="114" width="480" height="366"/>
+                                <rect key="frame" x="0.0" y="114" width="320" height="454"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="366" id="kS3-zr-K2e"/>
-                                </constraints>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostCell" textLabel="ZTe-cz-yyP" detailTextLabel="kK8-Sg-j0L" rowHeight="55" style="IBUITableViewCellStyleSubtitle" id="l4M-xZ-d1B">
@@ -121,7 +118,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="67O-cH-oqK" kind="show" identifier="ShowBrowser" id="ijZ-gT-P3h"/>
+                                            <segue destination="67O-cH-oqK" kind="push" identifier="ShowBrowser" id="ijZ-gT-P3h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -133,16 +130,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="leading" secondItem="xHn-jJ-Twf" secondAttribute="leading" constant="10" id="CSz-44-gPl"/>
-                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="top" secondItem="kIS-KG-cZA" secondAttribute="bottom" id="GyN-85-oB7"/>
-                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="leading" secondItem="xHn-jJ-Twf" secondAttribute="leading" id="KVI-yr-2aS"/>
-                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="leading" secondItem="kIS-KG-cZA" secondAttribute="leading" id="WLy-od-k54"/>
-                            <constraint firstAttribute="bottom" secondItem="GSA-Bh-1dA" secondAttribute="bottom" id="WWl-ZU-8m5"/>
-                            <constraint firstAttribute="trailing" secondItem="kIS-KG-cZA" secondAttribute="trailing" id="jGB-4G-qBy"/>
-                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="trailing" secondItem="kIS-KG-cZA" secondAttribute="trailing" id="sB7-rI-1r0"/>
-                            <constraint firstItem="kIS-KG-cZA" firstAttribute="top" secondItem="8Qd-dk-FSF" secondAttribute="bottom" constant="11" id="sRs-Dk-L8G"/>
-                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="centerX" secondItem="kIS-KG-cZA" secondAttribute="centerX" id="ug7-LW-OJK"/>
-                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="top" secondItem="vZo-xW-fhA" secondAttribute="bottom" constant="10" id="vwW-HB-YTh"/>
+                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="trailing" secondItem="kIS-KG-cZA" secondAttribute="trailing" id="3LY-Ir-vnY"/>
+                            <constraint firstAttribute="bottom" secondItem="GSA-Bh-1dA" secondAttribute="bottom" id="BSR-pT-pDt"/>
+                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="centerX" secondItem="kIS-KG-cZA" secondAttribute="centerX" id="FNK-pN-XNB"/>
+                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="leading" secondItem="xHn-jJ-Twf" secondAttribute="leading" constant="10" id="L7v-51-1Sh"/>
+                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="top" secondItem="8Qd-dk-FSF" secondAttribute="bottom" constant="12" id="Sz4-VA-rFN"/>
+                            <constraint firstItem="Eeq-zR-k7D" firstAttribute="top" secondItem="kIS-KG-cZA" secondAttribute="bottom" constant="366" id="W12-45-SYW"/>
+                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="top" secondItem="vZo-xW-fhA" secondAttribute="bottom" constant="10" id="brF-R0-rEk"/>
+                            <constraint firstItem="kIS-KG-cZA" firstAttribute="top" secondItem="8Qd-dk-FSF" secondAttribute="bottom" constant="11" id="eB2-xQ-GW2"/>
+                            <constraint firstAttribute="trailing" secondItem="kIS-KG-cZA" secondAttribute="trailing" id="eeG-vG-fwI"/>
+                            <constraint firstItem="kIS-KG-cZA" firstAttribute="leading" secondItem="GSA-Bh-1dA" secondAttribute="leading" id="qTz-nz-J6u"/>
+                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="leading" secondItem="xHn-jJ-Twf" secondAttribute="leading" id="v8l-53-VOd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Hacker News" id="B9t-Gk-PQ1"/>
@@ -152,8 +150,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uVO-he-OWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1111" y="360"/>
+            <point key="canvasLocation" x="740" y="426"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
+    </simulatedMetricsContainer>
     <color key="tintColor" red="1" green="0.40168795619999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
