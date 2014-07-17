@@ -2,6 +2,11 @@
 
 Hacker News reader iOS app using Swift
 
+## Screenshots
+
+![Main View](http://idzr.org/kiae)
+![Browser View](http://idzr.org/s108)
+
 ## Getting Started
 
 1. `git clone https://github.com/amitburst/HackerNews.git`
