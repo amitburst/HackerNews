@@ -19,7 +19,7 @@ class MainViewController: UIViewController, UITableViewDataSource {
     let postCellIdentifier = "PostCell"
     let showBrowserIdentifier = "ShowBrowser"
     var postFilter = PostFilterType.Top
-    var posts = HNPost[]()
+    var posts = [HNPost]()
     var refreshControl = UIRefreshControl()
     @IBOutlet var tableView: UITableView
     
@@ -48,8 +48,8 @@ class MainViewController: UIViewController, UITableViewDataSource {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
         
         HNManager.sharedManager().loadPostsWithFilter(postFilter, completion: { posts in
-            if (posts != nil && posts.count > 0) {
-                self.posts = posts as HNPost[]
+            if posts.count > 0 {
+                self.posts = posts as [HNPost]
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
                     self.refreshControl.endRefreshing()
