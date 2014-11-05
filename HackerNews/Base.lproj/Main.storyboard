@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ir3-Np-q9z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ir3-Np-q9z">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Browser View Controller-->
@@ -14,11 +13,11 @@
                         <viewControllerLayoutGuide type="bottom" id="p18-EF-gsv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nx8-F5-Mib">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Df4-Lb-5FS">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="67O-cH-oqK" id="ReW-2b-e8Q"/>
@@ -27,10 +26,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="leading" secondItem="nx8-F5-Mib" secondAttribute="leading" id="Dl1-8y-nkG"/>
-                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="top" secondItem="nx8-F5-Mib" secondAttribute="top" id="Q0u-wK-1kW"/>
-                            <constraint firstAttribute="bottom" secondItem="Df4-Lb-5FS" secondAttribute="bottom" id="hRG-fu-Xk6"/>
-                            <constraint firstAttribute="trailing" secondItem="Df4-Lb-5FS" secondAttribute="trailing" id="pb5-J7-UKu"/>
+                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="leading" secondItem="nx8-F5-Mib" secondAttribute="leading" id="76w-GE-VKf"/>
+                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="bottom" secondItem="p18-EF-gsv" secondAttribute="top" id="Q3r-Ln-cI8"/>
+                            <constraint firstAttribute="trailing" secondItem="Df4-Lb-5FS" secondAttribute="trailing" id="lfR-ce-7ga"/>
+                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="top" secondItem="nx8-F5-Mib" secondAttribute="top" id="qTb-KY-AjY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="e1w-Uh-uJs">
@@ -46,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cRu-Ae-eIG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212" y="427"/>
+            <point key="canvasLocation" x="2272.5" y="451.05633802816897"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WWx-hd-jOD">
@@ -64,7 +63,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Dr-Bs-yyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="290" y="427.18333333333334"/>
+            <point key="canvasLocation" x="543.75" y="451.25"/>
         </scene>
         <!--Hacker News-->
         <scene sceneID="GHw-OC-hqc">
@@ -75,15 +74,15 @@
                         <viewControllerLayoutGuide type="bottom" id="Eeq-zR-k7D"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xHn-jJ-Twf">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kIS-KG-cZA" customClass="HairlineView" customModule="HackerNews" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="113" width="320" height="89"/>
+                                <rect key="frame" x="0.0" y="113" width="600" height="121"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Qd-dk-FSF">
-                                <rect key="frame" x="10" y="74" width="301" height="29"/>
+                                <rect key="frame" x="10" y="74" width="581" height="29"/>
                                 <segments>
                                     <segment title="Top"/>
                                     <segment title="Newest"/>
@@ -93,12 +92,12 @@
                                     <action selector="changePostFilter:" destination="KY7-TY-Edg" eventType="valueChanged" id="hZB-JG-NRT"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GSA-Bh-1dA">
-                                <rect key="frame" x="0.0" y="114" width="320" height="454"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GSA-Bh-1dA">
+                                <rect key="frame" x="0.0" y="114" width="600" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostCell" textLabel="ZTe-cz-yyP" detailTextLabel="kK8-Sg-j0L" rowHeight="55" style="IBUITableViewCellStyleSubtitle" id="l4M-xZ-d1B">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostCell" textLabel="ZTe-cz-yyP" detailTextLabel="kK8-Sg-j0L" rowHeight="55" style="IBUITableViewCellStyleSubtitle" id="l4M-xZ-d1B">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l4M-xZ-d1B" id="Hw0-vt-zaP">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -118,7 +117,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="67O-cH-oqK" kind="push" identifier="ShowBrowser" id="ijZ-gT-P3h"/>
+                                            <segue destination="67O-cH-oqK" kind="show" identifier="ShowBrowser" id="ijZ-gT-P3h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -150,16 +149,8 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uVO-he-OWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="740" y="426"/>
+            <point key="canvasLocation" x="1387.5" y="449.99999999999994"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4">
-            <size key="portraitSize" width="320" height="568"/>
-            <size key="landscapeSize" width="568" height="320"/>
-        </simulatedScreenMetrics>
-    </simulatedMetricsContainer>
     <color key="tintColor" red="1" green="0.40168795619999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

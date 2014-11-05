@@ -5,14 +5,10 @@
 //  Copyright (c) 2014 Amit Burstein. All rights reserved.
 //  See LICENSE for licensing information.
 //
-//  Abstract:
-//      Handles fetching and displaying posts from Hacker News.
-//
 
 import UIKit
-import QuartzCore
 
-class MainViewController: UIViewController, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: Properties
 
@@ -21,7 +17,7 @@ class MainViewController: UIViewController, UITableViewDataSource {
     var postFilter = PostFilterType.Top
     var posts = [HNPost]()
     var refreshControl = UIRefreshControl()
-    @IBOutlet var tableView: UITableView
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: Lifecycle
     
@@ -29,11 +25,6 @@ class MainViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         configureUI()
         fetchPosts()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow(), animated: animated)
-        super.viewWillAppear(animated)
     }
     
     // MARK: Functions
@@ -65,16 +56,16 @@ class MainViewController: UIViewController, UITableViewDataSource {
     
     func stylePostCellAsRead(cell: UITableViewCell) {
         cell.textLabel.textColor = UIColor(red: 119/255.0, green: 119/255.0, blue: 119/255.0, alpha: 1)
-        cell.detailTextLabel.textColor = UIColor(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1)
+        cell.detailTextLabel?.textColor = UIColor(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1)
     }
     
     // MARK: UITableViewDataSource
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(postCellIdentifier) as UITableViewCell
         
         let post = posts[indexPath.row]
@@ -84,18 +75,24 @@ class MainViewController: UIViewController, UITableViewDataSource {
         }
         
         cell.textLabel.text = post.Title
-        cell.detailTextLabel.text = "\(post.Points) points by \(post.Username)"
+        cell.detailTextLabel?.text = "\(post.Points) points by \(post.Username)"
         
         return cell
     }
     
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     // MARK: UIViewController
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == showBrowserIdentifier {
             let webView = segue.destinationViewController as BrowserViewController
             let cell = sender as UITableViewCell
-            let post = posts[tableView.indexPathForCell(cell).row]
+            let post = posts[tableView.indexPathForSelectedRow()!.row]
             
             HNManager.sharedManager().setMarkAsReadForPost(post)
             stylePostCellAsRead(cell)

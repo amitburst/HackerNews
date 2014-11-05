@@ -5,9 +5,6 @@
 //  Copyright (c) 2014 Amit Burstein. All rights reserved.
 //  See LICENSE for licensing information.
 //
-//  Abstract:
-//      Handles various application lifecycle functions.
-//
 
 import UIKit
 

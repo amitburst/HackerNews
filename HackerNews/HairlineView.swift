@@ -11,7 +11,7 @@ import UIKit
 class HairlineView : UIView {
     
     override func awakeFromNib() {
-        layer.borderColor = backgroundColor.CGColor
+        layer.borderColor = backgroundColor?.CGColor
         layer.borderWidth = (1.0 / UIScreen.mainScreen().scale) / 2
         backgroundColor = UIColor.clearColor()
     }

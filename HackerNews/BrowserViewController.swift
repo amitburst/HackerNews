@@ -5,9 +5,6 @@
 //  Copyright (c) 2014 Amit Burstein. All rights reserved.
 //  See LICENSE for licensing information.
 //
-//  Abstract:
-//      Handles loading URLs for stories.
-//
 
 import UIKit
 
@@ -15,7 +12,7 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     
     // MARK: Properties
     
-    @IBOutlet var webView: UIWebView
+    @IBOutlet weak var webView: UIWebView!
     var post = HNPost()
     
     // MARK: Lifecycle
@@ -37,7 +34,7 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     
     func loadUrl() {
         let url = NSURL(string: post.UrlString)
-        let request = NSURLRequest(URL: url)
+        let request = NSURLRequest(URL: url!)
         webView.loadRequest(request)
     }
     
@@ -46,7 +43,7 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     @IBAction func showSharingOptions(sender : AnyObject) {
         let activityViewController = UIActivityViewController(activityItems: [String(post.Title), String(post.UrlString)], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [UIActivityTypeAssignToContact, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
-        navigationController.presentViewController(activityViewController, animated: true, completion: nil)
+        navigationController?.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
     // MARK: UIWebViewDelegate
