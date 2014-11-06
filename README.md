@@ -5,7 +5,7 @@ A Hacker News reader iOS app written in Swift.
 ## Screenshots
 
 ![Main View](http://idzr.org/xd1k)
-![Browser View](http://idzr.org/zze8)
+![Browser View](http://idzr.org/ejhk)
 
 ## Getting Started
 
