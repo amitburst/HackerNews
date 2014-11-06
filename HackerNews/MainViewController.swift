@@ -39,8 +39,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
         
         HNManager.sharedManager().loadPostsWithFilter(postFilter, completion: { posts in
-            if posts.count > 0 {
-                self.posts = posts as [HNPost]
+            if posts.0.count > 0 {
+                self.posts = posts.0 as [HNPost]
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
                     self.refreshControl.endRefreshing()
