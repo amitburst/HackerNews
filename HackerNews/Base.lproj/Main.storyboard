@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ir3-Np-q9z">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Browser View Controller-->
@@ -26,16 +27,41 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="leading" secondItem="nx8-F5-Mib" secondAttribute="leading" id="76w-GE-VKf"/>
-                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="bottom" secondItem="p18-EF-gsv" secondAttribute="top" id="Q3r-Ln-cI8"/>
-                            <constraint firstAttribute="trailing" secondItem="Df4-Lb-5FS" secondAttribute="trailing" id="lfR-ce-7ga"/>
-                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="top" secondItem="nx8-F5-Mib" secondAttribute="top" id="qTb-KY-AjY"/>
+                            <constraint firstAttribute="bottom" secondItem="Df4-Lb-5FS" secondAttribute="bottom" id="ESv-1K-wCU"/>
+                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="leading" secondItem="nx8-F5-Mib" secondAttribute="leading" id="WuZ-qx-Ks0"/>
+                            <constraint firstItem="Df4-Lb-5FS" firstAttribute="top" secondItem="nx8-F5-Mib" secondAttribute="top" id="XEK-QA-qjP"/>
+                            <constraint firstAttribute="trailing" secondItem="Df4-Lb-5FS" secondAttribute="trailing" id="jCg-3w-ZqC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="e1w-Uh-uJs">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="wfr-QA-Hvs">
+                    <toolbarItems>
+                        <barButtonItem systemItem="rewind" id="9Nx-St-7O3">
                             <connections>
-                                <action selector="showSharingOptions:" destination="67O-cH-oqK" id="zJl-dn-iIc"/>
+                                <action selector="goBack" destination="Df4-Lb-5FS" id="ebe-Vu-vc9"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="CPP-cM-wZE"/>
+                        <barButtonItem systemItem="fastForward" id="tRv-hA-YTc">
+                            <connections>
+                                <action selector="goForward" destination="Df4-Lb-5FS" id="7AV-f2-e0w"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Pox-3B-PtZ"/>
+                        <barButtonItem systemItem="refresh" id="6kl-Wi-L70">
+                            <connections>
+                                <action selector="reload" destination="Df4-Lb-5FS" id="CL1-Te-FZS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="cag-Tg-w4X"/>
+                        <barButtonItem systemItem="action" id="ifn-ev-Lt0">
+                            <connections>
+                                <action selector="showSharingOptions:" destination="67O-cH-oqK" id="PcG-Yh-E33"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="e1w-Uh-uJs">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="FSf-hk-OPQ">
+                            <connections>
+                                <action selector="closeModal:" destination="67O-cH-oqK" id="QvO-yY-rMd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -45,7 +71,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cRu-Ae-eIG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2272.5" y="451.05633802816897"/>
+            <point key="canvasLocation" x="3084" y="451"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WWx-hd-jOD">
@@ -57,6 +83,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2OG-Ja-fZE">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.40168795619999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
                     <connections>
                         <segue destination="KY7-TY-Edg" kind="relationship" relationship="rootViewController" id="QE5-bi-16x"/>
                     </connections>
@@ -117,7 +147,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="67O-cH-oqK" kind="show" identifier="ShowBrowser" id="ijZ-gT-P3h"/>
+                                            <segue destination="bu5-6Y-jy7" kind="presentation" identifier="ShowBrowser" id="ijZ-gT-P3h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -129,17 +159,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="trailing" secondItem="kIS-KG-cZA" secondAttribute="trailing" id="3LY-Ir-vnY"/>
-                            <constraint firstAttribute="bottom" secondItem="GSA-Bh-1dA" secondAttribute="bottom" id="BSR-pT-pDt"/>
-                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="centerX" secondItem="kIS-KG-cZA" secondAttribute="centerX" id="FNK-pN-XNB"/>
-                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="leading" secondItem="xHn-jJ-Twf" secondAttribute="leading" constant="10" id="L7v-51-1Sh"/>
-                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="top" secondItem="8Qd-dk-FSF" secondAttribute="bottom" constant="12" id="Sz4-VA-rFN"/>
-                            <constraint firstItem="Eeq-zR-k7D" firstAttribute="top" secondItem="kIS-KG-cZA" secondAttribute="bottom" constant="366" id="W12-45-SYW"/>
-                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="top" secondItem="vZo-xW-fhA" secondAttribute="bottom" constant="10" id="brF-R0-rEk"/>
-                            <constraint firstItem="kIS-KG-cZA" firstAttribute="top" secondItem="8Qd-dk-FSF" secondAttribute="bottom" constant="11" id="eB2-xQ-GW2"/>
-                            <constraint firstAttribute="trailing" secondItem="kIS-KG-cZA" secondAttribute="trailing" id="eeG-vG-fwI"/>
-                            <constraint firstItem="kIS-KG-cZA" firstAttribute="leading" secondItem="GSA-Bh-1dA" secondAttribute="leading" id="qTz-nz-J6u"/>
-                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="leading" secondItem="xHn-jJ-Twf" secondAttribute="leading" id="v8l-53-VOd"/>
+                            <constraint firstItem="Eeq-zR-k7D" firstAttribute="top" secondItem="kIS-KG-cZA" secondAttribute="bottom" constant="366" id="0Hf-cT-fdV"/>
+                            <constraint firstItem="kIS-KG-cZA" firstAttribute="leading" secondItem="GSA-Bh-1dA" secondAttribute="leading" id="6Eu-KJ-m6f"/>
+                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="leading" secondItem="xHn-jJ-Twf" secondAttribute="leading" id="6lS-ff-fdC"/>
+                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="leading" secondItem="xHn-jJ-Twf" secondAttribute="leadingMargin" constant="-6" id="9H0-6g-MSl"/>
+                            <constraint firstItem="kIS-KG-cZA" firstAttribute="centerX" secondItem="8Qd-dk-FSF" secondAttribute="centerX" id="PvQ-pb-xLt"/>
+                            <constraint firstItem="kIS-KG-cZA" firstAttribute="trailing" secondItem="GSA-Bh-1dA" secondAttribute="trailing" id="Szg-Ua-2Ar"/>
+                            <constraint firstItem="8Qd-dk-FSF" firstAttribute="top" secondItem="vZo-xW-fhA" secondAttribute="bottom" constant="10" id="gjW-Wh-hni"/>
+                            <constraint firstAttribute="trailing" secondItem="GSA-Bh-1dA" secondAttribute="trailing" id="mtw-ez-TVM"/>
+                            <constraint firstItem="kIS-KG-cZA" firstAttribute="top" secondItem="8Qd-dk-FSF" secondAttribute="bottom" constant="11" id="qQg-kq-hRL"/>
+                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="top" secondItem="8Qd-dk-FSF" secondAttribute="bottom" constant="12" id="qxw-Dk-OBu"/>
+                            <constraint firstItem="GSA-Bh-1dA" firstAttribute="bottom" secondItem="Eeq-zR-k7D" secondAttribute="top" id="ynR-E3-rxc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Hacker News" id="B9t-Gk-PQ1"/>
@@ -150,6 +180,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uVO-he-OWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1387.5" y="449.99999999999994"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GwL-om-QMu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="bu5-6Y-jy7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="E2S-VD-U38">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="7m2-Rb-Xc7">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.40168795619999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="67O-cH-oqK" kind="relationship" relationship="rootViewController" id="4r4-pf-thb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H8U-tE-45u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2272" y="451"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="0.40168795619999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

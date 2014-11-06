@@ -15,7 +15,7 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     @IBOutlet weak var webView: UIWebView!
     var post = HNPost()
     
-    // MARK: Lifecycle
+    // MARK: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,10 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     }
     
     // MARK: IBActions
+    
+    @IBAction func closeModal(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func showSharingOptions(sender : AnyObject) {
         let activityViewController = UIActivityViewController(activityItems: [String(post.Title), String(post.UrlString)], applicationActivities: nil)

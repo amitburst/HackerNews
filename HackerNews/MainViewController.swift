@@ -19,7 +19,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var refreshControl = UIRefreshControl()
     @IBOutlet weak var tableView: UITableView!
     
-    // MARK: Lifecycle
+    // MARK: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +90,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == showBrowserIdentifier {
-            let webView = segue.destinationViewController as BrowserViewController
+            let webView = segue.destinationViewController.childViewControllers[0] as BrowserViewController
             let cell = sender as UITableViewCell
             let post = posts[tableView.indexPathForSelectedRow()!.row]
             
