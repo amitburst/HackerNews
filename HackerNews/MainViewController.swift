@@ -55,7 +55,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func stylePostCellAsRead(cell: UITableViewCell) {
-        cell.textLabel.textColor = UIColor(red: 119/255.0, green: 119/255.0, blue: 119/255.0, alpha: 1)
+        cell.textLabel?.textColor = UIColor(red: 119/255.0, green: 119/255.0, blue: 119/255.0, alpha: 1)
         cell.detailTextLabel?.textColor = UIColor(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1)
     }
     
@@ -74,7 +74,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             stylePostCellAsRead(cell)
         }
         
-        cell.textLabel.text = post.Title
+        cell.textLabel?.text = post.Title
         cell.detailTextLabel?.text = "\(post.Points) points by \(post.Username)"
         
         return cell
