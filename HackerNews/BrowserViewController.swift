@@ -12,8 +12,16 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     
     // MARK: Properties
     
+    var post: HNPost!
+    
     @IBOutlet weak var webView: UIWebView!
-    var post = HNPost()
+    
+    // MARK: Initialization
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        post = HNPost()
+    }
     
     // MARK: UIViewController
     

@@ -12,12 +12,25 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: Properties
 
-    let postCellIdentifier = "PostCell"
-    let showBrowserIdentifier = "ShowBrowser"
+    let PostCellIdentifier = "PostCell"
+    let ShowBrowserIdentifier = "ShowBrowser"
+    let PullToRefreshString = "Pull to Refresh"
+    let ReadTextColor = UIColor(red: 0.467, green: 0.467, blue: 0.467, alpha: 1.0)
+    let ReadDetailTextColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0)
+    
     var postFilter = PostFilterType.Top
-    var posts = [HNPost]()
-    var refreshControl = UIRefreshControl()
+    var posts: [HNPost]!
+    var refreshControl: UIRefreshControl!
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: Initialization
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        posts = []
+        refreshControl = UIRefreshControl()
+    }
     
     // MARK: UIViewController
     
@@ -31,7 +44,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func configureUI() {
         refreshControl.addTarget(self, action: "fetchPosts", forControlEvents: .ValueChanged)
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
+        refreshControl.attributedTitle = NSAttributedString(string: PullToRefreshString)
         tableView.insertSubview(refreshControl, atIndex: 0)
     }
     
@@ -55,8 +68,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func stylePostCellAsRead(cell: UITableViewCell) {
-        cell.textLabel?.textColor = UIColor(red: 119/255.0, green: 119/255.0, blue: 119/255.0, alpha: 1)
-        cell.detailTextLabel?.textColor = UIColor(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1)
+        cell.textLabel?.textColor = ReadTextColor
+        cell.detailTextLabel?.textColor = ReadDetailTextColor
     }
     
     // MARK: UITableViewDataSource
@@ -66,7 +79,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(postCellIdentifier) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(PostCellIdentifier) as UITableViewCell
         
         let post = posts[indexPath.row]
         
@@ -89,7 +102,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: UIViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if segue.identifier == showBrowserIdentifier {
+        if segue.identifier == ShowBrowserIdentifier {
             let webView = segue.destinationViewController.childViewControllers[0] as BrowserViewController
             let cell = sender as UITableViewCell
             let post = posts[tableView.indexPathForSelectedRow()!.row]
