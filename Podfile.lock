@@ -2,7 +2,7 @@ PODS:
   - libHN (3.0.2)
 
 DEPENDENCIES:
-  - libHN (~> 3.0.0)
+  - libHN (~> 3.0.2)
 
 SPEC CHECKSUMS:
   libHN: 0c5ec22bf8480fee669efffa9f348752218c886e

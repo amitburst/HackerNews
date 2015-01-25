@@ -13,6 +13,7 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     // MARK: Properties
     
     var post: HNPost!
+    var toolbarBarButtonItems: [UIBarButtonItem]?
     
     @IBOutlet weak var webView: UIWebView!
     
@@ -21,13 +22,14 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         post = HNPost()
+        toolbarBarButtonItems = toolbarItems as? [UIBarButtonItem]
     }
     
     // MARK: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = post.Title
+        configureUI();
         loadUrl()
     }
     
@@ -39,6 +41,10 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     }
     
     // MARK: Functions
+    
+    func configureUI() {
+        title = post.Title
+    }
     
     func loadUrl() {
         let url = NSURL(string: post.UrlString)
@@ -66,6 +72,8 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        toolbarBarButtonItems?[0].enabled = webView.canGoBack
+        toolbarBarButtonItems?[2].enabled = webView.canGoForward
     }
     
 }
