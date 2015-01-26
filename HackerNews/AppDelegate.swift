@@ -13,12 +13,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Properties
     
+    let GlobalTintColor = UIColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
+    
     var window: UIWindow?
 
     // MARK: UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+        configureUI()
         return true
+    }
+    
+    // MARK: Functions
+    
+    func configureUI() {
+        window?.tintColor = GlobalTintColor
+        UISwitch.appearance().onTintColor = window?.tintColor
     }
 
 }

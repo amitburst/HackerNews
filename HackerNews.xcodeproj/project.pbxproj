@@ -14,6 +14,7 @@
 		D74A035E193DA4F500F01247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D74A035C193DA4F500F01247 /* Main.storyboard */; };
 		D74A036C193DA4F600F01247 /* HackerNewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A036B193DA4F600F01247 /* HackerNewsTests.swift */; };
 		D74A0376193DA50800F01247 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A0375193DA50800F01247 /* MainViewController.swift */; };
+		D757D9301A75BA2F0010E0B1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D757D92F1A75BA2F0010E0B1 /* SettingsViewController.swift */; };
 		D7E162041948499C00AC4298 /* HairlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E162031948499C00AC4298 /* HairlineView.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		D74A036A193DA4F600F01247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D74A036B193DA4F600F01247 /* HackerNewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerNewsTests.swift; sourceTree = "<group>"; };
 		D74A0375193DA50800F01247 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D757D92F1A75BA2F0010E0B1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D7E162031948499C00AC4298 /* HairlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HairlineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +108,7 @@
 			children = (
 				D74A0358193DA4F500F01247 /* AppDelegate.swift */,
 				D74A0375193DA50800F01247 /* MainViewController.swift */,
+				D757D92F1A75BA2F0010E0B1 /* SettingsViewController.swift */,
 				D7229DF9193EB445008F661B /* BrowserViewController.swift */,
 				D7E162031948499C00AC4298 /* HairlineView.swift */,
 				D71CA51D194698BC006DE243 /* HackerNews-Bridging-Header.h */,
@@ -278,6 +281,7 @@
 				D74A0376193DA50800F01247 /* MainViewController.swift in Sources */,
 				D7229DFA193EB445008F661B /* BrowserViewController.swift in Sources */,
 				D74A0359193DA4F500F01247 /* AppDelegate.swift in Sources */,
+				D757D9301A75BA2F0010E0B1 /* SettingsViewController.swift in Sources */,
 				D7E162041948499C00AC4298 /* HairlineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
