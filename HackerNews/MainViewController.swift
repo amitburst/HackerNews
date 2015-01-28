@@ -17,12 +17,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let PullToRefreshString = "Pull to Refresh"
     let ReadTextColor = UIColor(red: 0.467, green: 0.467, blue: 0.467, alpha: 1.0)
     let ReadDetailTextColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0)
+    let FetchErrorMessage = "Could Not Fetch Posts"
+    let NoPostsErrorMessage = "No More Posts to Fetch"
+    let ErrorMessageLabelTextColor = UIColor.grayColor()
+    let ErrorMessageFontSize: CGFloat = 16
     
     var postFilter = PostFilterType.Top
     var posts: [HNPost]!
     var nextPageId: String!
     var scrolledToBottom: Bool!
     var refreshControl: UIRefreshControl!
+    var errorMessageLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -50,6 +55,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         refreshControl.addTarget(self, action: "fetchPosts", forControlEvents: .ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: PullToRefreshString)
         tableView.insertSubview(refreshControl, atIndex: 0)
+        
+        // Have to initialize this UILabel here because the view does not exist in init() yet.
+        errorMessageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+        errorMessageLabel.textColor = ErrorMessageLabelTextColor
+        errorMessageLabel.textAlignment = .Center
+        errorMessageLabel.font = UIFont.systemFontOfSize(ErrorMessageFontSize)
     }
     
     func fetchPosts() {
@@ -58,25 +69,34 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let postUrlAddition = HNManager.sharedManager().postUrlAddition
         if !scrolledToBottom {
             HNManager.sharedManager().loadPostsWithFilter(postFilter, { posts, _ in
-                if posts.count > 0 {
+                if posts != nil && posts.count > 0 {
                     self.posts = posts as [HNPost]
                     dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.separatorStyle = .SingleLine
                         self.tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
                         self.tableView.reloadData()
                         self.refreshControl.endRefreshing()
                         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     })
                 } else {
-                    println("Could not fetch posts!")
+                    self.posts = []
+                    self.tableView.reloadData()
+                    if posts == nil {
+                        self.showErrorMessage(self.FetchErrorMessage)
+                    } else {
+                        self.showErrorMessage(self.NoPostsErrorMessage)
+                    }
+                    self.scrolledToBottom = false
                     self.refreshControl.endRefreshing()
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 }
             })
-        } else if postUrlAddition != nil { // Swift makes me keep the "== true"...
+        } else if postUrlAddition != nil {
             HNManager.sharedManager().loadPostsWithUrlAddition(postUrlAddition, { posts, _ in
-                if posts.count > 0 {
+                if posts != nil && posts.count > 0 {
                     self.posts.extend(posts as [HNPost])
                     dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.separatorStyle = .SingleLine
                         self.tableView.reloadData()
                         self.tableView.flashScrollIndicators()
                         self.scrolledToBottom = false
@@ -84,13 +104,25 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     })
                 } else {
-                    println("Could not fetch posts!")
+                    self.posts = []
+                    self.tableView.reloadData()
+                    if posts == nil {
+                        self.showErrorMessage(self.FetchErrorMessage)
+                    } else {
+                        self.showErrorMessage(self.NoPostsErrorMessage)
+                    }
                     self.scrolledToBottom = false
                     self.refreshControl.endRefreshing()
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 }
             })
         }
+    }
+    
+    func showErrorMessage(message: String) {
+        errorMessageLabel.text = message
+        self.tableView.backgroundView = errorMessageLabel
+        self.tableView.separatorStyle = .None
     }
     
     func stylePostCellAsRead(cell: UITableViewCell) {
@@ -125,6 +157,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    // MARK: UIScrollViewDelegate
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
         let bounds = scrollView.bounds
@@ -135,7 +169,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let h = size.height
         
         let reloadDistance: CGFloat = 10
-        if y > h + reloadDistance && !scrolledToBottom {
+        if y > h + reloadDistance && !scrolledToBottom && posts.count > 0 {
             scrolledToBottom = true
             fetchPosts()
         }
@@ -173,4 +207,5 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         fetchPosts()
     }
+
 }
