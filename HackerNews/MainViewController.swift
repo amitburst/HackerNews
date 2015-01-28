@@ -20,6 +20,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var postFilter = PostFilterType.Top
     var posts: [HNPost]!
+    var nextPageId: String!
+    var scrolledToBottom: Bool!
     var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
@@ -29,6 +31,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         posts = []
+        nextPageId = ""
+        scrolledToBottom = false
         refreshControl = UIRefreshControl()
     }
     
@@ -49,22 +53,44 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func fetchPosts() {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        HNManager.sharedManager().loadPostsWithFilter(postFilter, completion: { posts in
-            if posts.0.count > 0 {
-                self.posts = posts.0 as [HNPost]
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+        let postUrlAddition = HNManager.sharedManager().postUrlAddition
+        if !scrolledToBottom {
+            HNManager.sharedManager().loadPostsWithFilter(postFilter, { posts, _ in
+                if posts.count > 0 {
+                    self.posts = posts as [HNPost]
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+                        self.tableView.reloadData()
+                        self.refreshControl.endRefreshing()
+                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    })
+                } else {
+                    println("Could not fetch posts!")
                     self.refreshControl.endRefreshing()
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                })
-            } else {
-                println("Could not fetch posts!")
-                self.refreshControl.endRefreshing()
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
-            }
-        })
+                }
+            })
+        } else if postUrlAddition != nil { // Swift makes me keep the "== true"...
+            HNManager.sharedManager().loadPostsWithUrlAddition(postUrlAddition, { posts, _ in
+                if posts.count > 0 {
+                    self.posts.extend(posts as [HNPost])
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.reloadData()
+                        self.tableView.flashScrollIndicators()
+                        self.scrolledToBottom = false
+                        self.refreshControl.endRefreshing()
+                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    })
+                } else {
+                    println("Could not fetch posts!")
+                    self.scrolledToBottom = false
+                    self.refreshControl.endRefreshing()
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                }
+            })
+        }
     }
     
     func stylePostCellAsRead(cell: UITableViewCell) {
@@ -99,6 +125,22 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset
+        let bounds = scrollView.bounds
+        let size = scrollView.contentSize
+        let inset = scrollView.contentInset
+        
+        let y = offset.y + bounds.size.height - inset.bottom
+        let h = size.height
+        
+        let reloadDistance: CGFloat = 10
+        if y > h + reloadDistance && !scrolledToBottom {
+            scrolledToBottom = true
+            fetchPosts()
+        }
+    }
+    
     // MARK: UIViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -117,18 +159,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: IBActions
     
     @IBAction func changePostFilter(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
+        HNManager.sharedManager().postUrlAddition = nil
+        
+        if sender.selectedSegmentIndex == 0 {
             postFilter = .Top
-            fetchPosts()
-        case 1:
+        } else if sender.selectedSegmentIndex == 1 {
             postFilter = .New
-            fetchPosts()
-        case 2:
+        } else if sender.selectedSegmentIndex == 2 {
             postFilter = .Ask
-            fetchPosts()
-        default:
+        } else {
             println("Bad segment index!")
         }
+        
+        fetchPosts()
     }
 }
