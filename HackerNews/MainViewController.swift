@@ -8,15 +8,18 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NightModeSwitchChangedDelegate {
     
     // MARK: Properties
 
     let PostCellIdentifier = "PostCell"
     let ShowBrowserIdentifier = "ShowBrowser"
     let PullToRefreshString = "Pull to Refresh"
+    let ShowSettingIdentifier = "ShowSetting"
     let ReadTextColor = UIColor(red: 0.467, green: 0.467, blue: 0.467, alpha: 1.0)
     let ReadDetailTextColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0)
+    let ReadTextColorNight = UIColor(red: 0.533, green: 0.533, blue: 0.533, alpha: 1.0)
+    let ReadDetailTextColorNight = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
     let FetchErrorMessage = "Could Not Fetch Posts"
     let NoPostsErrorMessage = "No More Posts to Fetch"
     let ErrorMessageLabelTextColor = UIColor.grayColor()
@@ -28,6 +31,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var scrolledToBottom: Bool!
     var refreshControl: UIRefreshControl!
     var errorMessageLabel: UILabel!
+    
+    var isNightMode = false
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -47,6 +52,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         configureUI()
         fetchPosts()
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     // MARK: Functions
@@ -126,8 +137,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func stylePostCellAsRead(cell: UITableViewCell) {
-        cell.textLabel?.textColor = ReadTextColor
-        cell.detailTextLabel?.textColor = ReadDetailTextColor
+        
+        if !isNightMode {
+            cell.textLabel?.textColor = ReadTextColor
+            cell.detailTextLabel?.textColor = ReadDetailTextColor
+        } else {
+            cell.textLabel?.textColor = ReadTextColorNight
+            cell.detailTextLabel?.textColor = ReadDetailTextColorNight
+        }
+        
     }
     
     // MARK: UITableViewDataSource
@@ -141,9 +159,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let post = posts[indexPath.row]
         
-        if HNManager.sharedManager().hasUserReadPost(post) {
-            stylePostCellAsRead(cell)
-        }
+  
         
         cell.textLabel?.text = post.Title
         cell.detailTextLabel?.text = "\(post.Points) points by \(post.Username)"
@@ -155,6 +171,36 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let post = posts[indexPath.row]
+        
+        if isNightMode {
+            cell.backgroundColor = UIColor.blackColor()
+            
+            cell.textLabel?.textColor = UIColor.whiteColor()
+            cell.detailTextLabel?.textColor = UIColor.whiteColor()
+            
+        
+            
+            if HNManager.sharedManager().hasUserReadPost(post) {
+                stylePostCellAsRead(cell)
+            }
+            
+        } else {
+            cell.backgroundColor = UIColor.whiteColor()
+            
+            cell.textLabel?.textColor = UIColor.blackColor()
+            cell.detailTextLabel?.textColor = UIColor.blackColor()
+            
+            if HNManager.sharedManager().hasUserReadPost(post) {
+                stylePostCellAsRead(cell)
+            }
+            
+        }
+        
     }
     
     // MARK: UIScrollViewDelegate
@@ -182,11 +228,20 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let webView = segue.destinationViewController.childViewControllers[0] as BrowserViewController
             let cell = sender as UITableViewCell
             let post = posts[tableView.indexPathForSelectedRow()!.row]
-            
+            let NaviVC = segue.destinationViewController as UINavigationController
+            NaviVC.navigationBar.barTintColor = navigationController?.navigationBar.barTintColor
+            NaviVC.toolbar.barTintColor = navigationController?.navigationBar.barTintColor
+            NaviVC.navigationBar.titleTextAttributes = navigationController?.navigationBar.titleTextAttributes
+        
+
             HNManager.sharedManager().setMarkAsReadForPost(post)
             stylePostCellAsRead(cell)
 
             webView.post = post
+        } else if segue.identifier == ShowSettingIdentifier {
+            let settingView = segue.destinationViewController.childViewControllers[0] as SettingsViewController
+            settingView.delegate = self
+            settingView.isNightMode = isNightMode
         }
     }
     
@@ -206,6 +261,40 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         fetchPosts()
+    }
+    
+    //MARK: NightModeDelegate
+    
+    func NightModeChanged(nightModeSwitcher: UISwitch) {
+        if nightModeSwitcher.on {
+            NightModeConfiguration()
+            isNightMode = true
+        } else {
+            DayModeConfiguration()
+            isNightMode = false
+        }
+    }
+    
+    func DayModeConfiguration() {
+        view.backgroundColor = UIColor(red: 0.937255, green: 0.937255, blue: 0.956863, alpha: 1.0)
+        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor.blackColor() ]
+        tableView.backgroundColor = UIColor.whiteColor()
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
+
+    }
+    
+    func NightModeConfiguration() {
+        
+        view.backgroundColor = UIColor.blackColor()
+        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor.whiteColor() ]
+        tableView.backgroundColor = UIColor.blackColor()
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
+        
     }
 
 }

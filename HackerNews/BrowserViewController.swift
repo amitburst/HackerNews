@@ -29,9 +29,15 @@ class BrowserViewController : UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         configureUI();
         loadUrl()
+      
+        
+        
     }
+    
+
     
     override func viewDidDisappear(animated: Bool) {
         if isMovingFromParentViewController() {
