@@ -21,8 +21,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let NoPostsErrorMessage = "No More Posts to Fetch"
     let ErrorMessageLabelTextColor = UIColor.grayColor()
     let ErrorMessageFontSize: CGFloat = 16
+    let DefaultPostFilterType = PostFilterType.Top
     
-    var postFilter = PostFilterType.Top
+    var postFilter: PostFilterType!
     var posts: [HNPost]!
     var nextPageId: String!
     var scrolledToBottom: Bool!
@@ -35,6 +36,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        postFilter = DefaultPostFilterType
         posts = []
         nextPageId = ""
         scrolledToBottom = false

@@ -16,4 +16,8 @@ class SettingsViewController: UITableViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func nightModeToggle(sender: UISwitch) {
+        
+    }
+    
 }
