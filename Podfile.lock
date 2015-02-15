@@ -1,10 +1,10 @@
 PODS:
-  - libHN (3.0.2)
+  - libHN (3.1.1)
 
 DEPENDENCIES:
-  - libHN (~> 3.0.2)
+  - libHN (~> 3.1.1)
 
 SPEC CHECKSUMS:
-  libHN: 0c5ec22bf8480fee669efffa9f348752218c886e
+  libHN: 20a31b831c18aa17eadfd34815f14e9694d8da60
 
 COCOAPODS: 0.35.0
