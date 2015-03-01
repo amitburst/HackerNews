@@ -1,3 +1,1 @@
-platform :ios, '7.0'
-
-pod 'libHN', '~> 3.1.1'
+pod 'libHN', '~> 4.0.2'
