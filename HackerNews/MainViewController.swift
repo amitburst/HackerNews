@@ -70,9 +70,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let postUrlAddition = HNManager.sharedManager().postUrlAddition
         if !scrolledToBottom {
-            HNManager.sharedManager().loadPostsWithFilter(postFilter, { posts, _ in
+            HNManager.sharedManager().loadPostsWithFilter(postFilter, completion: { posts, _ in
                 if posts != nil && posts.count > 0 {
-                    self.posts = posts as [HNPost]
+                    self.posts = posts as! [HNPost]
                     dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.separatorStyle = .SingleLine
                         self.tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
@@ -94,9 +94,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 }
             })
         } else if postUrlAddition != nil {
-            HNManager.sharedManager().loadPostsWithUrlAddition(postUrlAddition, { posts, _ in
+            HNManager.sharedManager().loadPostsWithUrlAddition(postUrlAddition, completion: { posts, _ in
                 if posts != nil && posts.count > 0 {
-                    self.posts.extend(posts as [HNPost])
+                    self.posts.extend(posts as! [HNPost])
                     dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.separatorStyle = .SingleLine
                         self.tableView.reloadData()
@@ -139,7 +139,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(PostCellIdentifier) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(PostCellIdentifier) as! UITableViewCell
         
         let post = posts[indexPath.row]
         
@@ -181,8 +181,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == ShowBrowserIdentifier {
-            let webView = segue.destinationViewController.childViewControllers[0] as BrowserViewController
-            let cell = sender as UITableViewCell
+            let webView = segue.destinationViewController.childViewControllers[0] as! BrowserViewController
+            let cell = sender as! UITableViewCell
             let post = posts[tableView.indexPathForSelectedRow()!.row]
             
             HNManager.sharedManager().setMarkAsReadForPost(post)
