@@ -7,7 +7,7 @@ A Hacker News reader iOS app written in Swift.
 1. `git clone https://github.com/amitburst/HackerNews.git`
 2. `cd HackerNews`
 3. `pod install`
-4. Open `HackerNews.xcworkspace` in Xcode 6.1 or higher
+4. Open `HackerNews.xcworkspace` in Xcode 7 or higher
 
 ## Contributing
 
@@ -15,8 +15,9 @@ Please feel free to help out with this project! If you see something that could 
 
 ## Screenshots
 
-![Main View](http://idzr.org/xd1k)
-![Browser View](http://idzr.org/ejhk)
+![Main View](Resources/screenshot1.png)
+![Browser View](Resources/screenshot2.png)
 
 ## License
+
 [MIT](LICENSE)

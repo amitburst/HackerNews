@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
     
     // MARK: Properties
 
@@ -139,7 +140,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(PostCellIdentifier) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(PostCellIdentifier) as UITableViewCell!
+        cell.textLabel?.textColor = nil
+        cell.detailTextLabel?.textColor = nil
         
         let post = posts[indexPath.row]
         
@@ -157,6 +160,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let post = posts[indexPath.row]
+        let url = NSURL(string: post.UrlString)!
+        HNManager.sharedManager().setMarkAsReadForPost(post)
+        stylePostCellAsRead(tableView.cellForRowAtIndexPath(indexPath)!)
+
+        let webViewController = SFSafariViewController(URL: url)
+        webViewController.delegate = self
+        presentViewController(webViewController, animated: true, completion: nil)
     }
     
     // MARK: UIScrollViewDelegate
@@ -177,19 +189,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    // MARK: UIViewController
+    // MARK: SFSafariViewControllerDelegate
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if segue.identifier == ShowBrowserIdentifier {
-            let webView = segue.destinationViewController.childViewControllers[0] as! BrowserViewController
-            let cell = sender as! UITableViewCell
-            let post = posts[tableView.indexPathForSelectedRow()!.row]
-            
-            HNManager.sharedManager().setMarkAsReadForPost(post)
-            stylePostCellAsRead(cell)
-
-            webView.post = post
-        }
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: IBActions
@@ -204,7 +207,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else if sender.selectedSegmentIndex == 2 {
             postFilter = .Ask
         } else {
-            println("Bad segment index!")
+            print("Bad segment index!")
         }
         
         fetchPosts()
