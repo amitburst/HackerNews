@@ -2,7 +2,7 @@
 //  MainViewController.swift
 //  HackerNews
 //
-//  Copyright (c) 2014 Amit Burstein. All rights reserved.
+//  Copyright (c) 2015 Amit Burstein. All rights reserved.
 //  See LICENSE for licensing information.
 //
 
@@ -16,31 +16,47 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let PostCellIdentifier = "PostCell"
     let ShowBrowserIdentifier = "ShowBrowser"
     let PullToRefreshString = "Pull to Refresh"
-    let ReadTextColor = UIColor(red: 0.467, green: 0.467, blue: 0.467, alpha: 1.0)
-    let ReadDetailTextColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0)
     let FetchErrorMessage = "Could Not Fetch Posts"
-    let NoPostsErrorMessage = "No More Posts to Fetch"
     let ErrorMessageLabelTextColor = UIColor.grayColor()
     let ErrorMessageFontSize: CGFloat = 16
-    let DefaultPostFilterType = PostFilterType.Top
+    let FirebaseRef = "https://hacker-news.firebaseio.com/v0/"
+    let ItemChildRef = "item"
+    let StoryTypeChildRefMap = [StoryType.Top: "topstories", .New: "newstories", .Show: "showstories"]
+    let StoryLimit: UInt = 30
+    let DefaultStoryType = StoryType.Top
     
-    var postFilter: PostFilterType!
-    var posts: [HNPost]!
-    var nextPageId: String!
-    var scrolledToBottom: Bool!
+    var firebase: Firebase!
+    var stories: [Story]!
+    var storyType: StoryType!
+    var retrievingStories: Bool!
     var refreshControl: UIRefreshControl!
     var errorMessageLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: Enums
+    
+    enum StoryType {
+        case Top, New, Show
+    }
+    
+    // MARK: Structs
+    
+    struct Story {
+        var title: String
+        var url: String
+        var by: String
+        var score: Int
+    }
+    
     // MARK: Initialization
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        postFilter = DefaultPostFilterType
-        posts = []
-        nextPageId = ""
-        scrolledToBottom = false
+        firebase = Firebase(url: FirebaseRef)
+        stories = []
+        storyType = DefaultStoryType
+        retrievingStories = false
         refreshControl = UIRefreshControl()
     }
     
@@ -49,13 +65,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        fetchPosts()
+        retrieveStories()
     }
     
     // MARK: Functions
     
     func configureUI() {
-        refreshControl.addTarget(self, action: "fetchPosts", forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: "retrieveStories", forControlEvents: .ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: PullToRefreshString)
         tableView.insertSubview(refreshControl, atIndex: 0)
         
@@ -66,60 +82,51 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         errorMessageLabel.font = UIFont.systemFontOfSize(ErrorMessageFontSize)
     }
     
-    func fetchPosts() {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        
-        let postUrlAddition = HNManager.sharedManager().postUrlAddition
-        if !scrolledToBottom {
-            HNManager.sharedManager().loadPostsWithFilter(postFilter, completion: { posts, _ in
-                if posts != nil && posts.count > 0 {
-                    self.posts = posts as! [HNPost]
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.tableView.separatorStyle = .SingleLine
-                        self.tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
-                        self.tableView.reloadData()
-                        self.refreshControl.endRefreshing()
-                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                    })
-                } else {
-                    self.posts = []
-                    self.tableView.reloadData()
-                    if posts == nil {
-                        self.showErrorMessage(self.FetchErrorMessage)
-                    } else {
-                        self.showErrorMessage(self.NoPostsErrorMessage)
-                    }
-                    self.scrolledToBottom = false
-                    self.refreshControl.endRefreshing()
-                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                }
-            })
-        } else if postUrlAddition != nil {
-            HNManager.sharedManager().loadPostsWithUrlAddition(postUrlAddition, completion: { posts, _ in
-                if posts != nil && posts.count > 0 {
-                    self.posts.extend(posts as! [HNPost])
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.tableView.separatorStyle = .SingleLine
-                        self.tableView.reloadData()
-                        self.tableView.flashScrollIndicators()
-                        self.scrolledToBottom = false
-                        self.refreshControl.endRefreshing()
-                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                    })
-                } else {
-                    self.posts = []
-                    self.tableView.reloadData()
-                    if posts == nil {
-                        self.showErrorMessage(self.FetchErrorMessage)
-                    } else {
-                        self.showErrorMessage(self.NoPostsErrorMessage)
-                    }
-                    self.scrolledToBottom = false
-                    self.refreshControl.endRefreshing()
-                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                }
-            })
+    func retrieveStories() {
+        if retrievingStories! {
+            return
         }
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        stories = []
+        retrievingStories = true
+        var storiesMap = [Int:Story]()
+        
+        let query = firebase.childByAppendingPath(StoryTypeChildRefMap[storyType]).queryLimitedToFirst(StoryLimit)
+        query.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            let storyIds = snapshot.value as! [Int]
+            for storyId in storyIds {
+                let query = self.firebase.childByAppendingPath(self.ItemChildRef).childByAppendingPath(String(storyId))
+                query.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                    let title = snapshot.value["title"] as! String
+                    let url = snapshot.value["url"] as! String
+                    let by = snapshot.value["by"] as! String
+                    let score = snapshot.value["score"] as! Int
+                    let story = Story(title: title, url: url, by: by, score: score)
+                    storiesMap[storyId] = story
+                    
+                    if storiesMap.count == Int(self.StoryLimit) {
+                        var sortedStories = [Story]()
+                        for storyId in storyIds {
+                            sortedStories.append(storiesMap[storyId]!)
+                        }
+                        self.stories = sortedStories
+                        self.tableView.reloadData()
+                        self.refreshControl.endRefreshing()
+                        self.retrievingStories = false
+                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    }
+                    }, withCancelBlock: { error in
+                        self.retrievingStories = false
+                        self.showErrorMessage(self.FetchErrorMessage)
+                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                })
+            }
+        }, withCancelBlock: { error in
+            self.retrievingStories = false
+            self.showErrorMessage(self.FetchErrorMessage)
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        })
     }
     
     func showErrorMessage(message: String) {
@@ -128,31 +135,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.separatorStyle = .None
     }
     
-    func stylePostCellAsRead(cell: UITableViewCell) {
-        cell.textLabel?.textColor = ReadTextColor
-        cell.detailTextLabel?.textColor = ReadDetailTextColor
-    }
-    
     // MARK: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return stories.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let story = stories[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(PostCellIdentifier) as UITableViewCell!
-        cell.textLabel?.textColor = nil
-        cell.detailTextLabel?.textColor = nil
-        
-        let post = posts[indexPath.row]
-        
-        if HNManager.sharedManager().hasUserReadPost(post) {
-            stylePostCellAsRead(cell)
-        }
-        
-        cell.textLabel?.text = post.Title
-        cell.detailTextLabel?.text = "\(post.Points) points by \(post.Username)"
-        
+        cell.textLabel?.text = story.title
+        cell.detailTextLabel?.text = "\(story.score) points by \(story.by)"
         return cell
     }
     
@@ -161,32 +154,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let post = posts[indexPath.row]
-        let url = NSURL(string: post.UrlString)!
-        HNManager.sharedManager().setMarkAsReadForPost(post)
-        stylePostCellAsRead(tableView.cellForRowAtIndexPath(indexPath)!)
-
+        let story = stories[indexPath.row]
+        let url = NSURL(string: story.url)!
+        
         let webViewController = SFSafariViewController(URL: url)
         webViewController.delegate = self
         presentViewController(webViewController, animated: true, completion: nil)
-    }
-    
-    // MARK: UIScrollViewDelegate
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset
-        let bounds = scrollView.bounds
-        let size = scrollView.contentSize
-        let inset = scrollView.contentInset
-        
-        let y = offset.y + bounds.size.height - inset.bottom
-        let h = size.height
-        
-        let reloadDistance: CGFloat = 10
-        if y > h + reloadDistance && !scrolledToBottom && posts.count > 0 {
-            scrolledToBottom = true
-            fetchPosts()
-        }
     }
     
     // MARK: SFSafariViewControllerDelegate
@@ -197,20 +170,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: IBActions
     
-    @IBAction func changePostFilter(sender: UISegmentedControl) {
-        HNManager.sharedManager().postUrlAddition = nil
-        
+    @IBAction func changeStoryType(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            postFilter = .Top
+            storyType = .Top
         } else if sender.selectedSegmentIndex == 1 {
-            postFilter = .New
+            storyType = .New
         } else if sender.selectedSegmentIndex == 2 {
-            postFilter = .Ask
+            storyType = .Show
         } else {
             print("Bad segment index!")
         }
         
-        fetchPosts()
+        retrieveStories()
     }
 
 }

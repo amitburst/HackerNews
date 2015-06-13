@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  HackerNews
 //
-//  Copyright (c) 2014 Amit Burstein. All rights reserved.
+//  Copyright (c) 2015 Amit Burstein. All rights reserved.
 //  See LICENSE for licensing information.
 //
 
@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        HNManager.sharedManager().startSession()
         configureUI()
         return true
     }

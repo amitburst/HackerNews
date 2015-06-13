@@ -1,10 +1,10 @@
 PODS:
-  - libHN (4.0.4)
+  - Firebase (2.3.1)
 
 DEPENDENCIES:
-  - libHN (~> 4.0.4)
+  - Firebase (= 2.3.1)
 
 SPEC CHECKSUMS:
-  libHN: 3571ddc61a302b1f01213dd50c932c29a6f5b390
+  Firebase: 462795adf92029ddb97777660627f5dd4fd59876
 
 COCOAPODS: 0.37.2

@@ -2,8 +2,8 @@
 //  HackerNewsTests.swift
 //  HackerNewsTests
 //
-//  Created by Amit Burstein on 6/2/14.
-//  Copyright (c) 2014 Amit Burstein. All rights reserved.
+//  Copyright (c) 2015 Amit Burstein. All rights reserved.
+//  See LICENSE for licensing information.
 //
 
 import XCTest
