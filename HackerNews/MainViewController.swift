@@ -51,7 +51,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: Initialization
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         firebase = Firebase(url: FirebaseRef)
         stories = []

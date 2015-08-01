@@ -1,1 +1,1 @@
-pod 'Firebase', '2.3.1'
+pod 'Firebase', '2.3.3'
