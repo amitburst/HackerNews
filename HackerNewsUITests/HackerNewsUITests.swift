@@ -19,6 +19,7 @@ class HackerNewsUITests: XCTestCase {
   
   func testUIElementsVisible() {
     let app = XCUIApplication()
+    XCTAssertEqual(app.label, "Hacker News")
     XCTAssertEqual(app.navigationBars.element.identifier, "Hacker News")
     XCTAssertEqual(app.segmentedControls.buttons.elementBoundByIndex(0).label, "Top")
     XCTAssertEqual(app.segmentedControls.buttons.elementBoundByIndex(1).label, "Newest")
