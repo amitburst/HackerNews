@@ -88,7 +88,9 @@
 				CCE49832B4D8478F9BB2CF29 /* Frameworks */,
 				2A2F4D9B84CBC5559739EF28 /* Pods */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		D74A0354193DA4F500F01247 /* Products */ = {
 			isa = PBXGroup;
