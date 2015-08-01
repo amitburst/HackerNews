@@ -44,7 +44,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   
   struct Story {
     var title: String
-    var url: String
+    var url: String?
     var by: String
     var score: Int
   }
@@ -99,7 +99,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let query = self.firebase.childByAppendingPath(self.ItemChildRef).childByAppendingPath(String(storyId))
         query.observeSingleEventOfType(.Value, withBlock: { snapshot in
           let title = snapshot.value["title"] as! String
-          let url = snapshot.value["url"] as! String
+          let url = snapshot.value["url"] as? String
           let by = snapshot.value["by"] as! String
           let score = snapshot.value["score"] as! Int
           let story = Story(title: title, url: url, by: by, score: score)
@@ -159,11 +159,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
     let story = stories[indexPath.row]
-    let url = NSURL(string: story.url)!
-    
-    let webViewController = SFSafariViewController(URL: url)
-    webViewController.delegate = self
-    presentViewController(webViewController, animated: true, completion: nil)
+    if let url = story.url {
+      let webViewController = SFSafariViewController(URL: NSURL(string: url)!)
+      webViewController.delegate = self
+      presentViewController(webViewController, animated: true, completion: nil)
+    }
   }
   
   // MARK: SFSafariViewControllerDelegate
