@@ -116,14 +116,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         self.retrievingStories = false
                         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     }
-                    }, withCancelBlock: { error in
-                        self.retrievingStories = false
-                        self.showErrorMessage(self.FetchErrorMessage)
-                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                }, withCancelBlock: { error in
+                    self.retrievingStories = false
+                    self.stories.removeAll()
+                    self.tableView.reloadData()
+                    self.showErrorMessage(self.FetchErrorMessage)
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 })
             }
         }, withCancelBlock: { error in
             self.retrievingStories = false
+            self.stories.removeAll()
+            self.tableView.reloadData()
             self.showErrorMessage(self.FetchErrorMessage)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         })

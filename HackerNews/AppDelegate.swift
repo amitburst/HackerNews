@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func configureUI() {
         window?.tintColor = GlobalTintColor
-        UISwitch.appearance().onTintColor = window?.tintColor
     }
 
 }
