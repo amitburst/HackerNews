@@ -43,10 +43,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   // MARK: Structs
   
   struct Story {
-    var title: String
-    var url: String?
-    var by: String
-    var score: Int
+    let title: String
+    let url: String?
+    let by: String
+    let score: Int
   }
   
   // MARK: Initialization
@@ -95,15 +95,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let query = firebase.childByAppendingPath(StoryTypeChildRefMap[storyType]).queryLimitedToFirst(StoryLimit)
     query.observeSingleEventOfType(.Value, withBlock: { snapshot in
       let storyIds = snapshot.value as! [Int]
+      
       for storyId in storyIds {
         let query = self.firebase.childByAppendingPath(self.ItemChildRef).childByAppendingPath(String(storyId))
         query.observeSingleEventOfType(.Value, withBlock: { snapshot in
-          let title = snapshot.value["title"] as! String
-          let url = snapshot.value["url"] as? String
-          let by = snapshot.value["by"] as! String
-          let score = snapshot.value["score"] as! Int
-          let story = Story(title: title, url: url, by: by, score: score)
-          storiesMap[storyId] = story
+          storiesMap[storyId] = self.extractStory(snapshot)
           
           if storiesMap.count == Int(self.StoryLimit) {
             var sortedStories = [Story]()
@@ -116,21 +112,26 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.retrievingStories = false
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
           }
-          }, withCancelBlock: { error in
-            self.retrievingStories = false
-            self.stories.removeAll()
-            self.tableView.reloadData()
-            self.showErrorMessage(self.FetchErrorMessage)
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        })
+          }, withCancelBlock: self.loadingFailed)
       }
-      }, withCancelBlock: { error in
-        self.retrievingStories = false
-        self.stories.removeAll()
-        self.tableView.reloadData()
-        self.showErrorMessage(self.FetchErrorMessage)
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-    })
+      }, withCancelBlock: self.loadingFailed)
+  }
+  
+  private func extractStory(snapshot: FDataSnapshot) -> Story {
+    let title = snapshot.value["title"] as! String
+    let url = snapshot.value["url"] as? String
+    let by = snapshot.value["by"] as! String
+    let score = snapshot.value["score"] as! Int
+    
+    return Story(title: title, url: url, by: by, score: score)
+  }
+  
+  private func loadingFailed(error: NSError!) -> Void {
+    self.retrievingStories = false
+    self.stories.removeAll()
+    self.tableView.reloadData()
+    self.showErrorMessage(self.FetchErrorMessage)
+    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
   }
   
   func showErrorMessage(message: String) {
