@@ -4,7 +4,7 @@ A Hacker News reader iOS app written in Swift.
 
 ## Features
 
-* View top, newest, and show posts from Hacker News.
+* View "top", "newest", and "show" posts from Hacker News.
 * Read posts using the new `SFSafariViewController` component.
 * Uses the official [Firebase-based Hacker News API](https://github.com/HackerNews/API).
 
@@ -13,7 +13,7 @@ A Hacker News reader iOS app written in Swift.
 1. `git clone https://github.com/amitburst/HackerNews.git`
 2. `cd HackerNews`
 3. `pod install`
-4. Open `HackerNews.xcworkspace` in Xcode 7 (beta 4) or higher.
+4. Open `HackerNews.xcworkspace` in Xcode 7.1.1 or higher.
 
 ## Contributing
 
