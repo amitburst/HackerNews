@@ -1,4 +1,15 @@
-link_with 'HackerNews', 'HackerNewsTests'
-link_with 'HackerNews', 'HackerNewsUITests'
+def pods
+  pod 'Firebase', '2.5.0'
+end
 
-pod 'Firebase', '2.4.3'
+target 'HackerNews' do
+  pods
+end
+
+target 'HackerNewsTests' do
+  pods
+end
+
+target 'HackerNewsUITests' do
+  pods
+end

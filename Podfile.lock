@@ -1,10 +1,12 @@
 PODS:
-  - Firebase (2.4.3)
+  - Firebase (2.5.0)
 
 DEPENDENCIES:
-  - Firebase (= 2.4.3)
+  - Firebase (= 2.5.0)
 
 SPEC CHECKSUMS:
-  Firebase: 48179995b561e2262c5d4060ecdffca45fbbff8b
+  Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: f968715aa7fcbbaf2e88c64a28484a0453e9f5a6
+
+COCOAPODS: 1.0.0.beta.6
