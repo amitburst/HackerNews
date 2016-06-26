@@ -12,7 +12,7 @@ A Hacker News reader iOS app written in Swift.
 
 1. `git clone https://github.com/amitburst/HackerNews.git`
 2. `cd HackerNews`
-3. `pod install`
+3. `pod install` (requires [CocoaPods](https://cocoapods.org))
 4. Open `HackerNews.xcworkspace` in Xcode 7.1.1 or higher.
 
 ## Contributing
