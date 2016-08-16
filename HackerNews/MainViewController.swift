@@ -71,7 +71,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   // MARK: Functions
   
   func configureUI() {
-    refreshControl.addTarget(self, action: "retrieveStories", forControlEvents: .ValueChanged)
+    refreshControl.addTarget(self, action: #selector(MainViewController.retrieveStories), forControlEvents: .ValueChanged)
     refreshControl.attributedTitle = NSAttributedString(string: PullToRefreshString)
     tableView.insertSubview(refreshControl, atIndex: 0)
     
