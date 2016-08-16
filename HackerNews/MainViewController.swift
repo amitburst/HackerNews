@@ -26,7 +26,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   let DefaultStoryType = StoryType.Top
   
   var firebase: Firebase!
-  var stories: [Story]!
+  var stories: [Story]! = []
   var storyType: StoryType!
   var retrievingStories: Bool!
   var refreshControl: UIRefreshControl!
@@ -88,7 +88,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-    stories = []
     retrievingStories = true
     var storiesMap = [Int:Story]()
     
