@@ -21,8 +21,8 @@ class HackerNewsUITests: XCTestCase {
     let app = XCUIApplication()
     XCTAssertEqual(app.label, "Hacker News")
     XCTAssertEqual(app.navigationBars.element.identifier, "Hacker News")
-    XCTAssertEqual(app.segmentedControls.buttons.elementBoundByIndex(0).label, "Top")
-    XCTAssertEqual(app.segmentedControls.buttons.elementBoundByIndex(1).label, "Newest")
-    XCTAssertEqual(app.segmentedControls.buttons.elementBoundByIndex(2).label, "Show HN")
+    XCTAssertEqual(app.segmentedControls.buttons.element(boundBy: 0).label, "Top")
+    XCTAssertEqual(app.segmentedControls.buttons.element(boundBy: 1).label, "Newest")
+    XCTAssertEqual(app.segmentedControls.buttons.element(boundBy: 2).label, "Show HN")
   }
 }

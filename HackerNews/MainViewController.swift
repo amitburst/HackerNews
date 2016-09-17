@@ -17,13 +17,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   let ShowBrowserIdentifier = "ShowBrowser"
   let PullToRefreshString = "Pull to Refresh"
   let FetchErrorMessage = "Could Not Fetch Posts"
-  let ErrorMessageLabelTextColor = UIColor.grayColor()
+  let ErrorMessageLabelTextColor = UIColor.gray
   let ErrorMessageFontSize: CGFloat = 16
   let FirebaseRef = "https://hacker-news.firebaseio.com/v0/"
   let ItemChildRef = "item"
-  let StoryTypeChildRefMap = [StoryType.Top: "topstories", .New: "newstories", .Show: "showstories"]
+  let StoryTypeChildRefMap = [StoryType.top: "topstories", .new: "newstories", .show: "showstories"]
   let StoryLimit: UInt = 30
-  let DefaultStoryType = StoryType.Top
+  let DefaultStoryType = StoryType.top
   
   var firebase: Firebase!
   var stories: [Story]! = []
@@ -37,7 +37,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   // MARK: Enums
   
   enum StoryType {
-    case Top, New, Show
+    case top, new, show
   }
   
   // MARK: Structs
@@ -71,15 +71,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   // MARK: Functions
   
   func configureUI() {
-    refreshControl.addTarget(self, action: #selector(MainViewController.retrieveStories), forControlEvents: .ValueChanged)
+    refreshControl.addTarget(self, action: #selector(MainViewController.retrieveStories), for: .valueChanged)
     refreshControl.attributedTitle = NSAttributedString(string: PullToRefreshString)
-    tableView.insertSubview(refreshControl, atIndex: 0)
+    tableView.insertSubview(refreshControl, at: 0)
     
     // Have to initialize this UILabel here because the view does not exist in init() yet.
-    errorMessageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+    errorMessageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
     errorMessageLabel.textColor = ErrorMessageLabelTextColor
-    errorMessageLabel.textAlignment = .Center
-    errorMessageLabel.font = UIFont.systemFontOfSize(ErrorMessageFontSize)
+    errorMessageLabel.textAlignment = .center
+    errorMessageLabel.font = UIFont.systemFont(ofSize: ErrorMessageFontSize)
   }
   
   func retrieveStories() {
@@ -87,18 +87,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
       return
     }
     
-    UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    UIApplication.shared.isNetworkActivityIndicatorVisible = true
     retrievingStories = true
     var storiesMap = [Int:Story]()
     
-    let query = firebase.childByAppendingPath(StoryTypeChildRefMap[storyType]).queryLimitedToFirst(StoryLimit)
-    query.observeSingleEventOfType(.Value, withBlock: { snapshot in
-      let storyIds = snapshot.value as! [Int]
+    let query = firebase.child(byAppendingPath: StoryTypeChildRefMap[storyType]).queryLimited(toFirst: StoryLimit)
+    query?.observeSingleEvent(of: .value, with: { snapshot in
+      let storyIds = snapshot?.value as! [Int]
       
       for storyId in storyIds {
-        let query = self.firebase.childByAppendingPath(self.ItemChildRef).childByAppendingPath(String(storyId))
-        query.observeSingleEventOfType(.Value, withBlock: { snapshot in
-          storiesMap[storyId] = self.extractStory(snapshot)
+        let query = self.firebase.child(byAppendingPath: self.ItemChildRef).child(byAppendingPath: String(storyId))
+        query?.observeSingleEvent(of: .value, with: { snapshot in
+          storiesMap[storyId] = self.extractStory(snapshot!)
           
           if storiesMap.count == Int(self.StoryLimit) {
             var sortedStories = [Story]()
@@ -109,78 +109,79 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
             self.retrievingStories = false
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
           }
-          }, withCancelBlock: self.loadingFailed)
+          }, withCancel: self.loadingFailed)
       }
-      }, withCancelBlock: self.loadingFailed)
+      }, withCancel: self.loadingFailed)
   }
   
-  private func extractStory(snapshot: FDataSnapshot) -> Story {
-    let title = snapshot.value["title"] as! String
-    let url = snapshot.value["url"] as? String
-    let by = snapshot.value["by"] as! String
-    let score = snapshot.value["score"] as! Int
+  func extractStory(_ snapshot: FDataSnapshot) -> Story {
+    let data = snapshot.value as! Dictionary<String, Any>
+    let title = data["title"] as! String
+    let url = data["url"] as? String
+    let by = data["by"] as! String
+    let score = data["score"] as! Int
     
     return Story(title: title, url: url, by: by, score: score)
   }
   
-  private func loadingFailed(error: NSError!) -> Void {
+  func loadingFailed(_ error: Error?) -> Void {
     self.retrievingStories = false
     self.stories.removeAll()
     self.tableView.reloadData()
     self.showErrorMessage(self.FetchErrorMessage)
-    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    UIApplication.shared.isNetworkActivityIndicatorVisible = false
   }
   
-  func showErrorMessage(message: String) {
+  func showErrorMessage(_ message: String) {
     errorMessageLabel.text = message
     self.tableView.backgroundView = errorMessageLabel
-    self.tableView.separatorStyle = .None
+    self.tableView.separatorStyle = .none
   }
   
   // MARK: UITableViewDataSource
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return stories.count
   }
   
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let story = stories[indexPath.row]
-    let cell = tableView.dequeueReusableCellWithIdentifier(PostCellIdentifier) as UITableViewCell!
-    cell.textLabel?.text = story.title
-    cell.detailTextLabel?.text = "\(story.score) points by \(story.by)"
-    return cell
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let story = stories[(indexPath as NSIndexPath).row]
+    let cell = tableView.dequeueReusableCell(withIdentifier: PostCellIdentifier) as UITableViewCell!
+    cell?.textLabel?.text = story.title
+    cell?.detailTextLabel?.text = "\(story.score) points by \(story.by)"
+    return cell!
   }
   
   // MARK: UITableViewDelegate
   
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
     
-    let story = stories[indexPath.row]
+    let story = stories[(indexPath as NSIndexPath).row]
     if let url = story.url {
-      let webViewController = SFSafariViewController(URL: NSURL(string: url)!)
+      let webViewController = SFSafariViewController(url: URL(string: url)!)
       webViewController.delegate = self
-      presentViewController(webViewController, animated: true, completion: nil)
+      present(webViewController, animated: true, completion: nil)
     }
   }
   
   // MARK: SFSafariViewControllerDelegate
   
-  func safariViewControllerDidFinish(controller: SFSafariViewController) {
-    controller.dismissViewControllerAnimated(true, completion: nil)
+  func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+    controller.dismiss(animated: true, completion: nil)
   }
   
   // MARK: IBActions
   
-  @IBAction func changeStoryType(sender: UISegmentedControl) {
+  @IBAction func changeStoryType(_ sender: UISegmentedControl) {
     if sender.selectedSegmentIndex == 0 {
-      storyType = .Top
+      storyType = .top
     } else if sender.selectedSegmentIndex == 1 {
-      storyType = .New
+      storyType = .new
     } else if sender.selectedSegmentIndex == 2 {
-      storyType = .Show
+      storyType = .show
     } else {
       print("Bad segment index!")
     }
