@@ -147,7 +147,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let story = stories[(indexPath as NSIndexPath).row]
+    let story = stories[indexPath.row]
     let cell = tableView.dequeueReusableCell(withIdentifier: PostCellIdentifier) as UITableViewCell!
     cell?.textLabel?.text = story.title
     cell?.detailTextLabel?.text = "\(story.score) points by \(story.by)"
@@ -159,7 +159,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
-    let story = stories[(indexPath as NSIndexPath).row]
+    let story = stories[indexPath.row]
     if let url = story.url {
       let webViewController = SFSafariViewController(url: URL(string: url)!)
       webViewController.delegate = self
