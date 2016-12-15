@@ -1,12 +1,24 @@
 PODS:
   - Firebase (2.5.0)
+  - MobileCenter (0.3.4):
+    - MobileCenter/MobileCenterAnalytics (= 0.3.4)
+    - MobileCenter/MobileCenterCrashes (= 0.3.4)
+  - MobileCenter/MobileCenter (0.3.4)
+  - MobileCenter/MobileCenterAnalytics (0.3.4):
+    - MobileCenter/MobileCenter
+  - MobileCenter/MobileCenterCrashes (0.3.4):
+    - MobileCenter/MobileCenter
 
 DEPENDENCIES:
   - Firebase (= 2.5.0)
+  - MobileCenter
+  - MobileCenter/MobileCenterAnalytics
+  - MobileCenter/MobileCenterCrashes
 
 SPEC CHECKSUMS:
   Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
+  MobileCenter: 4f9b236f547d109a5703ba8df09ea8955f9213a6
 
-PODFILE CHECKSUM: f968715aa7fcbbaf2e88c64a28484a0453e9f5a6
+PODFILE CHECKSUM: b3c8d989adfa15474353b116292a44d32b23f0b6
 
 COCOAPODS: 1.1.1
