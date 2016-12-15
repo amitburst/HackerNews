@@ -21,18 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // MARK: UIApplicationDelegate
   
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:[UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
-
-  
-  launchOptions:
+        MSMobileCenter.start("e4438ab9-4299-4226-ae6a-208eb84df373", withServices: [MSAnalytics.self, MSCrashes.self])
     
-    
-    
-    [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     configureUI()
     return true
   }
+  
+
   
   // MARK: Functions
   
