@@ -5,7 +5,9 @@
 //  Copyright (c) 2015 Amit Burstein. All rights reserved.
 //  See LICENSE for licensing information.
 //
-
+import MobileCenter
+import MobileCenterAnalytics
+import MobileCenterCrashes
 import UIKit
 
 @UIApplicationMain
@@ -19,10 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // MARK: UIApplicationDelegate
   
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:[UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+        MSMobileCenter.start("e4438ab9-4299-4226-ae6a-208eb84df373", withServices: [MSAnalytics.self, MSCrashes.self])
+    
     configureUI()
     return true
   }
+  
+
   
   // MARK: Functions
   

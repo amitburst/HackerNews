@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23C4F68A1E0349B700A831A9 /* MobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C4F6871E0349B700A831A9 /* MobileCenter.framework */; };
+		23C4F68B1E0349B700A831A9 /* MobileCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C4F6881E0349B700A831A9 /* MobileCenterAnalytics.framework */; };
+		23C4F68C1E0349B700A831A9 /* MobileCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C4F6891E0349B700A831A9 /* MobileCenterCrashes.framework */; };
 		4F8219F707E687C004248DF1 /* libPods-HackerNewsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 968F53F3E2A631FD683B394F /* libPods-HackerNewsTests.a */; };
 		98F2FC9208B97EF48EA94F5C /* libPods-HackerNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6179244E1E7A250286CCF78 /* libPods-HackerNews.a */; };
 		A639CD2397C7DD8F920991EF /* libPods-HackerNewsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 192727F69DBDD660CDA8204C /* libPods-HackerNewsUITests.a */; };
@@ -39,6 +42,9 @@
 /* Begin PBXFileReference section */
 		0B5CABD8DC255E1769BB0358 /* Pods-HackerNewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackerNewsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackerNewsUITests/Pods-HackerNewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		192727F69DBDD660CDA8204C /* libPods-HackerNewsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HackerNewsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23C4F6871E0349B700A831A9 /* MobileCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenter.framework; sourceTree = "<group>"; };
+		23C4F6881E0349B700A831A9 /* MobileCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenterAnalytics.framework; sourceTree = "<group>"; };
+		23C4F6891E0349B700A831A9 /* MobileCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenterCrashes.framework; sourceTree = "<group>"; };
 		39662C2708ADAE016DA5A828 /* Pods-HackerNewsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackerNewsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackerNewsTests/Pods-HackerNewsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9551B3E2F84C01B4BD8E4362 /* Pods-HackerNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackerNews.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackerNews/Pods-HackerNews.debug.xcconfig"; sourceTree = "<group>"; };
 		968F53F3E2A631FD683B394F /* libPods-HackerNewsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HackerNewsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +74,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				98F2FC9208B97EF48EA94F5C /* libPods-HackerNews.a in Frameworks */,
+				23C4F68A1E0349B700A831A9 /* MobileCenter.framework in Frameworks */,
+				23C4F68B1E0349B700A831A9 /* MobileCenterAnalytics.framework in Frameworks */,
+				23C4F68C1E0349B700A831A9 /* MobileCenterCrashes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +99,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23C4F6861E03496800A831A9 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				23C4F6871E0349B700A831A9 /* MobileCenter.framework */,
+				23C4F6881E0349B700A831A9 /* MobileCenterAnalytics.framework */,
+				23C4F6891E0349B700A831A9 /* MobileCenterCrashes.framework */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
 		28BDE4D2A6AC24A545906A8F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +135,7 @@
 		D74A034A193DA4F500F01247 = {
 			isa = PBXGroup;
 			children = (
+				23C4F6861E03496800A831A9 /* Vendor */,
 				D74A0355193DA4F500F01247 /* HackerNews */,
 				D74A0368193DA4F600F01247 /* HackerNewsTests */,
 				D7EF90A81B6C617F00EB6915 /* HackerNewsUITests */,
@@ -617,6 +637,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				INFOPLIST_FILE = HackerNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -638,6 +662,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				INFOPLIST_FILE = HackerNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
