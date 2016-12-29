@@ -8,6 +8,8 @@
 
 import UIKit
 import SafariServices
+import PocketMediaNativeAds
+import Firebase
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
   
@@ -31,6 +33,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
   var retrievingStories: Bool!
   var refreshControl: UIRefreshControl!
   var errorMessageLabel: UILabel!
+  
+  var adStream : NativeAdStream?
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -66,6 +70,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     super.viewDidLoad()
     configureUI()
     retrieveStories()
+    setupAds()
   }
   
   // MARK: Functions
@@ -114,6 +119,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
           }, withCancel: self.loadingFailed)
       }
       }, withCancel: self.loadingFailed)
+  }
+  
+  func setupAds(){
+    // PocketMedia add ads
+    adStream = NativeAdStream(controller: self, view: self.tableView, adPlacementToken: "894d2357e086434a383a1c29868a0432958a3165", adPosition: MarginAdPosition()) /* replace with your own token!! */
+    adStream?.requestAds(5) // Add 5 ads
+
   }
   
   func extractStory(_ snapshot: FDataSnapshot) -> Story {

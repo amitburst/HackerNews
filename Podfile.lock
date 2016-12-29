@@ -1,12 +1,25 @@
 PODS:
   - Firebase (2.5.0)
+  - PocketMediaNativeAds (1.0.0)
 
 DEPENDENCIES:
   - Firebase (= 2.5.0)
+  - PocketMediaNativeAds (from `https://github.com/Pocketbrain/nativeadslib-ios.git`, commit `2b769c0529e5c8b6bf4008cfcd3e15cd5f449d47`)
+
+EXTERNAL SOURCES:
+  PocketMediaNativeAds:
+    :commit: 2b769c0529e5c8b6bf4008cfcd3e15cd5f449d47
+    :git: https://github.com/Pocketbrain/nativeadslib-ios.git
+
+CHECKOUT OPTIONS:
+  PocketMediaNativeAds:
+    :commit: 2b769c0529e5c8b6bf4008cfcd3e15cd5f449d47
+    :git: https://github.com/Pocketbrain/nativeadslib-ios.git
 
 SPEC CHECKSUMS:
   Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
+  PocketMediaNativeAds: d28e569253de122384f4f01b043c16082b3e1bb2
 
-PODFILE CHECKSUM: f968715aa7fcbbaf2e88c64a28484a0453e9f5a6
+PODFILE CHECKSUM: b310fe89535865b2219a25d56c688681d53b5089
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.1
