@@ -1,4 +1,5 @@
 use_frameworks!
+platform :ios, '9.0'
 
 def pods
   pod 'Firebase', '2.5.0'

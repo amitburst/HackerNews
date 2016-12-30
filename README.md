@@ -1,6 +1,9 @@
 # HackerNews
 
-A Hacker News reader iOS app written in Swift.
+A Hacker News reader iOS app written in Swift, [fork of great amitburt's client](https://github.com/amitburst/HackerNews) to include [Pocket Media Native Ads](https://github.com/Pocketbrain/nativeadslib-ios).
+
+In [a few lines of code](https://github.com/Pocketbrain/HackerNews/commit/54c6a670d304c0d614ba14e9ff75a38a4c87a67c), the library was added to the project. The rest of the app works exactly as intended originally.
+
 
 ## Features
 
