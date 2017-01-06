@@ -121,11 +121,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
       }, withCancel: self.loadingFailed)
   }
   
-  func setupAds(){
+  func setupAds() {
     // PocketMedia add ads
-    adStream = NativeAdStream(controller: self, view: self.tableView, adPlacementToken: "894d2357e086434a383a1c29868a0432958a3165", adPosition: MarginAdPosition()) /* replace with your own token!! */
+    adStream = NativeAdStream(controller: self, view: self.tableView, adPlacementToken: "894d2357e086434a383a1c29868a0432958a3165", customXib: UINib.init(nibName: "CustomAd", bundle: nil), adPosition: MarginAdPosition()) /* replace with your own token!! */
     adStream?.requestAds(5) // Add 5 ads
-
   }
   
   func extractStory(_ snapshot: FDataSnapshot) -> Story {
