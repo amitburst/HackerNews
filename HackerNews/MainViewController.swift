@@ -82,7 +82,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     errorMessageLabel.font = UIFont.systemFont(ofSize: ErrorMessageFontSize)
   }
   
-  func retrieveStories() {
+  @objc func retrieveStories() {
     if retrievingStories! {
       return
     }
