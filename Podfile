@@ -1,7 +1,8 @@
-platform :ios, '11.2'
+platform :ios, '13.0'
 
 def pods
   pod 'Firebase', '2.5.0'
+  pod 'AmplitudeSwift', '~> 1.1.0'
 end
 
 target 'HackerNews' do
