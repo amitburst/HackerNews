@@ -1,12 +1,24 @@
 PODS:
+  - AmplitudeSwift (1.1.0):
+    - AnalyticsConnector (~> 1.0.1)
+  - AnalyticsConnector (1.0.3)
   - Firebase (2.5.0)
 
 DEPENDENCIES:
+  - AmplitudeSwift (~> 1.1.0)
   - Firebase (= 2.5.0)
 
+SPEC REPOS:
+  trunk:
+    - AmplitudeSwift
+    - AnalyticsConnector
+    - Firebase
+
 SPEC CHECKSUMS:
+  AmplitudeSwift: 1ac941da7f93c779c667f65eecca9384c9ec2bfe
+  AnalyticsConnector: a53214d38ae22734c6266106c0492b37832633a9
   Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
 
-PODFILE CHECKSUM: cfe3d047b5e96738ae1bd1990cbc89b44ba79618
+PODFILE CHECKSUM: aa5db499a4f0a622ef0227dbd0983fbb91e50c34
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.11.3
